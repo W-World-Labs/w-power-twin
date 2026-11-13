@@ -1,0 +1,9 @@
+# Third-party and external-material boundaries
+
+W-authored application code, synthetic plant catalogs and documentation are MIT. Original W contributors retained in this edition: kanshan and zots0127. Rust and npm dependencies are not vendored or relicensed. Public CI records exact locked package identities, sources, integrity values and upstream licence declarations. Compiled application/dependency code is not included in the uploaded source package; a future binary or frontend-bundle distribution needs its own complete linked/bundled licence inventory and review.
+
+`webgl-constants` 1.1.1 omits a licence field in its package metadata. Its exact npm archive, verified against the committed SHA-512 integrity, contains the MIT licence of Tim van Scherpenzeel. That text is preserved at `licenses/webgl-constants-MIT.txt`; CI compares it with the installed archive's LICENSE before recording MIT in the declaration inventory. No package implementation is copied here.
+
+`data/sources.json` and the UI credits retain publicly cited external model/asset titles, authors, upstream licence declarations and transformation notes. They are references, not bundled asset/data files or a blanket redistribution grant. No GLB, HDRI, texture, model weight, research recording, aerial reference or dataset is included. CWRU citation wording and research-use wording require separate permission review; datasets default to not being fetched. CC-BY/CC-BY-SA attribution and other applicable terms remain the operator's responsibility for any assets they obtain and distribute.
+
+Python download helpers use the standard library. The optional optimization command uses the separately obtained original glTF Transform tool; its implementation is not part of this source tree. Python, Rust, Node.js, graphics drivers and separately acquired models/data retain their own terms.

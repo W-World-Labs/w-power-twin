@@ -1,0 +1,7 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Exact synthetic SF6 density parameter identifier, with nominal 0.6 and low alarm 0.55; not an API credential"
+regexTarget = "match"
+regexes = ['''key": "sf6_density_mpa"''']

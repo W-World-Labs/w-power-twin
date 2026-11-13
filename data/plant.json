@@ -1,0 +1,643 @@
+{
+  "schema_version": 1,
+  "plant": {
+    "id": "unit-1",
+    "name": { "zh": "4 × 660 MW 燃煤电厂 · 1号机组导览", "en": "4 × 660 MW coal-fired plant · Unit 1 tour" },
+    "summary": {
+      "zh": "四机组厂区总览，设备导览与额定参数对应1号机组。煤的化学能在锅炉中变为蒸汽热能，汽轮机把热能变为转子机械能，发电机把机械能变为电能，主变压器升压后经开关站送入电网。",
+      "en": "Four-unit site overview; equipment tours and rated parameters describe Unit 1. Coal's chemical energy becomes steam heat in the boiler, the turbine turns heat into shaft rotation, the generator turns rotation into electricity, and the main transformer steps it up for the switchyard and grid."
+    },
+    "rated": {
+      "gross_output_mw": 660,
+      "main_steam_mpa": 24.2,
+      "main_steam_c": 566,
+      "reheat_steam_c": 566,
+      "feedwater_c": 282,
+      "condenser_kpa": 4.9,
+      "generator_kv": 20,
+      "grid_kv": 500,
+      "frequency_hz": 50,
+      "speed_rpm": 3000,
+      "gross_efficiency_pct": 43.5
+    },
+    "site_gross_output_mw": 2640,
+    "rated_scope": "unit-1",
+    "coordinate_system": "metres; x east, y up, z south; origin at central turbine-hall axis",
+    "code_note": "Equipment codes follow KKS-style system letters for demonstration; they are illustrative, not a real plant's code list."
+  },
+  "site": {
+    "bounds": [
+      800,
+      620
+    ],
+    "units": [
+      {
+        "id": "unit-1",
+        "name": {
+          "zh": "1号机组",
+          "en": "Unit 1"
+        },
+        "hall": [
+          -155,
+          0,
+          8
+        ],
+        "boiler": [
+          -155,
+          0,
+          -72
+        ],
+        "cooling_tower": [
+          -285,
+          0,
+          185
+        ],
+        "detailed": true
+      },
+      {
+        "id": "unit-2",
+        "name": {
+          "zh": "2号机组",
+          "en": "Unit 2"
+        },
+        "hall": [
+          -50,
+          0,
+          8
+        ],
+        "boiler": [
+          -50,
+          0,
+          -72
+        ],
+        "cooling_tower": [
+          -150,
+          0,
+          185
+        ],
+        "detailed": false
+      },
+      {
+        "id": "unit-3",
+        "name": {
+          "zh": "3号机组",
+          "en": "Unit 3"
+        },
+        "hall": [
+          55,
+          0,
+          8
+        ],
+        "boiler": [
+          55,
+          0,
+          -72
+        ],
+        "cooling_tower": [
+          150,
+          0,
+          185
+        ],
+        "detailed": false
+      },
+      {
+        "id": "unit-4",
+        "name": {
+          "zh": "4号机组",
+          "en": "Unit 4"
+        },
+        "hall": [
+          160,
+          0,
+          8
+        ],
+        "boiler": [
+          160,
+          0,
+          -72
+        ],
+        "cooling_tower": [
+          285,
+          0,
+          185
+        ],
+        "detailed": false
+      }
+    ],
+    "secondary_stack": [
+      110,
+      0,
+      -188
+    ],
+    "storage_tanks": [
+      -310,
+      0,
+      -243
+    ],
+    "camera": {
+      "position": [
+        -620,
+        700,
+        820
+      ],
+      "target": [
+        0,
+        15,
+        30
+      ]
+    },
+    "note": "Four-unit architectural context inspired by the user-provided aerial reference; process catalog and rated parameters describe Unit 1. Layout is illustrative, not a surveyed engineering plan."
+  },
+  "stages": [
+    { "id": "fuel", "order": 1, "name": { "zh": "燃料制备", "en": "Fuel preparation" }, "conversion": { "zh": "原煤 → 煤粉", "en": "Raw coal → pulverized coal" } },
+    { "id": "combustion", "order": 2, "name": { "zh": "燃烧与产汽", "en": "Combustion and steam raising" }, "conversion": { "zh": "化学能 → 热能", "en": "Chemical energy → heat" } },
+    { "id": "expansion", "order": 3, "name": { "zh": "蒸汽做功", "en": "Steam expansion" }, "conversion": { "zh": "热能 → 机械能", "en": "Heat → mechanical energy" } },
+    { "id": "generation", "order": 4, "name": { "zh": "发电", "en": "Generation" }, "conversion": { "zh": "机械能 → 电能", "en": "Mechanical → electrical energy" } },
+    { "id": "cycle", "order": 5, "name": { "zh": "汽水循环", "en": "Water–steam cycle" }, "conversion": { "zh": "乏汽凝结、给水回热", "en": "Exhaust condensed, feedwater reheated" } },
+    { "id": "grid", "order": 6, "name": { "zh": "升压与送出", "en": "Step-up and export" }, "conversion": { "zh": "20 kV → 500 kV", "en": "20 kV → 500 kV" } },
+    { "id": "emissions", "order": 7, "name": { "zh": "烟气治理", "en": "Flue gas treatment" }, "conversion": { "zh": "除尘、脱硫、脱硝", "en": "Dust, SO₂ and NOₓ removal" } }
+  ],
+  "devices": [
+    {
+      "id": "coal-yard",
+      "kks": "1EAA01",
+      "kind": "yard",
+      "stage": "fuel",
+      "name": { "zh": "煤场与斗轮机", "en": "Coal yard and stacker-reclaimer" },
+      "principle": {
+        "zh": "来煤卸入煤场堆存，斗轮堆取料机按配煤要求取煤送上输煤皮带。",
+        "en": "Delivered coal is stockpiled; the bucket-wheel stacker-reclaimer reclaims blended coal onto the conveyor."
+      },
+      "position": [-302, 0, -125],
+      "size": [106, 14, 176],
+      "params": [
+        { "key": "stock_t", "name": { "zh": "存煤量", "en": "Coal stock" }, "unit": "t", "nominal": 180000 },
+        { "key": "pile_temp_c", "name": { "zh": "煤堆表面温度", "en": "Pile surface temperature" }, "unit": "°C", "nominal": 25, "alarm_high": 60 }
+      ],
+      "failure_modes": [
+        { "id": "pile-self-heating", "name": { "zh": "煤堆自燃", "en": "Coal pile self-heating" }, "modalities": ["infrared", "visible", "gas"], "signature": { "zh": "红外局部高温，伴随烟雾与 CO 升高", "en": "Local IR hotspot with smoke and rising CO" } }
+      ]
+    },
+    {
+      "id": "coal-conveyor",
+      "kks": "1EAC01",
+      "kind": "conveyor",
+      "stage": "fuel",
+      "name": { "zh": "输煤皮带", "en": "Coal conveyor" },
+      "principle": {
+        "zh": "皮带由电动机经减速机驱动，把煤从煤场送到锅炉房原煤仓。",
+        "en": "A motor-driven belt carries coal from the yard to the boiler-house bunkers."
+      },
+      "position": [-219, 12, -85],
+      "size": [80, 4, 4],
+      "params": [
+        { "key": "flow_tph", "name": { "zh": "输煤量", "en": "Coal flow" }, "unit": "t/h", "nominal": 1200 },
+        { "key": "belt_offset_mm", "name": { "zh": "皮带跑偏量", "en": "Belt misalignment" }, "unit": "mm", "nominal": 0, "alarm_high": 50 }
+      ],
+      "failure_modes": [
+        { "id": "belt-misalignment", "name": { "zh": "皮带跑偏", "en": "Belt misalignment" }, "modalities": ["visible"], "signature": { "zh": "视频中皮带边缘偏离托辊中心线", "en": "Belt edge drifts off the idler centre line in video" } },
+        { "id": "idler-bearing-fire", "name": { "zh": "托辊轴承过热起火", "en": "Idler bearing overheating / fire" }, "modalities": ["infrared", "acoustic", "visible"], "signature": { "zh": "托辊红外高温、异响，严重时冒烟", "en": "Hot idler in IR, squeal, smoke when severe" } }
+      ]
+    },
+    {
+      "id": "coal-mill",
+      "kks": "1HFC10",
+      "kind": "mill",
+      "stage": "fuel",
+      "name": { "zh": "中速磨煤机", "en": "Vertical roller coal mill" },
+      "principle": {
+        "zh": "磨辊在旋转磨盘上碾碎原煤，热一次风把煤粉干燥并送入燃烧器。",
+        "en": "Rollers crush coal on a rotating table; hot primary air dries the powder and carries it to the burners."
+      },
+      "position": [-193, 0, -72],
+      "size": [10, 12, 10],
+      "params": [
+        { "key": "outlet_temp_c", "name": { "zh": "磨出口温度", "en": "Mill outlet temperature" }, "unit": "°C", "nominal": 75, "alarm_high": 90 },
+        { "key": "motor_current_a", "name": { "zh": "电机电流", "en": "Motor current" }, "unit": "A", "nominal": 52 },
+        { "key": "vibration_mm_s", "name": { "zh": "振动速度", "en": "Vibration velocity" }, "unit": "mm/s", "nominal": 2.5, "alarm_high": 7.1 }
+      ],
+      "failure_modes": [
+        { "id": "mill-fire", "name": { "zh": "磨煤机着火", "en": "Mill fire" }, "modalities": ["process", "infrared", "gas"], "signature": { "zh": "出口温度突升、CO 升高、外壳红外温升", "en": "Outlet temperature jump, CO rise, casing IR heating" } },
+        { "id": "mill-vibration", "name": { "zh": "磨辊异常振动", "en": "Roller vibration" }, "modalities": ["vibration", "acoustic"], "signature": { "zh": "振动幅值超限并出现冲击谐波", "en": "Vibration over limit with impact harmonics" } }
+      ]
+    },
+    {
+      "id": "boiler",
+      "kks": "1HAD10",
+      "kind": "boiler",
+      "stage": "combustion",
+      "name": { "zh": "超临界直流锅炉", "en": "Supercritical once-through boiler" },
+      "principle": {
+        "zh": "煤粉在炉膛燃烧，热量经水冷壁、过热器、再热器、省煤器传给工质；超临界参数下水直接变为蒸汽，没有汽包。",
+        "en": "Pulverized coal burns in the furnace; heat passes through water walls, superheaters, reheaters and the economizer. At supercritical pressure water turns to steam without a drum."
+      },
+      "position": [-155, 0, -72],
+      "size": [42, 90, 38],
+      "params": [
+        { "key": "main_steam_mpa", "name": { "zh": "主蒸汽压力", "en": "Main steam pressure" }, "unit": "MPa", "nominal": 24.2, "alarm_high": 25.4 },
+        { "key": "main_steam_c", "name": { "zh": "主蒸汽温度", "en": "Main steam temperature" }, "unit": "°C", "nominal": 566, "alarm_high": 576 },
+        { "key": "furnace_pressure_pa", "name": { "zh": "炉膛负压", "en": "Furnace pressure" }, "unit": "Pa", "nominal": -100, "alarm_high": 300 },
+        { "key": "flue_o2_pct", "name": { "zh": "烟气含氧量", "en": "Flue gas O₂" }, "unit": "%", "nominal": 3.2 }
+      ],
+      "failure_modes": [
+        { "id": "tube-leak", "name": { "zh": "受热面泄漏（四管泄漏）", "en": "Boiler tube leak" }, "modalities": ["acoustic", "process", "visible"], "signature": { "zh": "声学测漏能量升高、给水流量与蒸汽流量偏差增大", "en": "Acoustic leak energy rises; feedwater-vs-steam flow mismatch grows" } },
+        { "id": "slagging", "name": { "zh": "炉膛结焦", "en": "Furnace slagging" }, "modalities": ["visible", "infrared", "process"], "signature": { "zh": "看火孔图像出现焦块，排烟温度升高", "en": "Slag visible at view ports; exit gas temperature rises" } }
+      ]
+    },
+    {
+      "id": "fd-fan",
+      "kks": "1HLB10",
+      "kind": "fan",
+      "stage": "combustion",
+      "name": { "zh": "送风机", "en": "Forced-draft fan" },
+      "principle": {
+        "zh": "送风机把空气经空气预热器加热后送入炉膛，提供燃烧所需氧气。",
+        "en": "Pushes combustion air through the air preheater into the furnace."
+      },
+      "position": [-190, 0, -48],
+      "size": [8, 6, 8],
+      "params": [
+        { "key": "vibration_mm_s", "name": { "zh": "轴承振动", "en": "Bearing vibration" }, "unit": "mm/s", "nominal": 2.0, "alarm_high": 7.1 },
+        { "key": "bearing_temp_c", "name": { "zh": "轴承温度", "en": "Bearing temperature" }, "unit": "°C", "nominal": 55, "alarm_high": 80 }
+      ],
+      "failure_modes": [
+        { "id": "fan-imbalance", "name": { "zh": "叶轮不平衡", "en": "Impeller imbalance" }, "modalities": ["vibration", "acoustic"], "signature": { "zh": "1 倍转频振动分量突出", "en": "Dominant 1× running-speed vibration" } }
+      ]
+    },
+    {
+      "id": "id-fan",
+      "kks": "1HNC10",
+      "kind": "fan",
+      "stage": "emissions",
+      "name": { "zh": "引风机", "en": "Induced-draft fan" },
+      "principle": {
+        "zh": "引风机把烟气从炉膛抽出，维持炉膛微负压。",
+        "en": "Draws flue gas out of the furnace and keeps it at slight negative pressure."
+      },
+      "position": [-135, 0, -154],
+      "size": [9, 7, 9],
+      "params": [
+        { "key": "vibration_mm_s", "name": { "zh": "轴承振动", "en": "Bearing vibration" }, "unit": "mm/s", "nominal": 2.2, "alarm_high": 7.1 },
+        { "key": "bearing_temp_c", "name": { "zh": "轴承温度", "en": "Bearing temperature" }, "unit": "°C", "nominal": 58, "alarm_high": 80 }
+      ],
+      "failure_modes": [
+        { "id": "id-fan-bearing-wear", "name": { "zh": "轴承磨损", "en": "Bearing wear" }, "modalities": ["vibration", "acoustic", "infrared"], "signature": { "zh": "包络谱出现轴承故障特征频率，轴承座温升", "en": "Bearing defect frequencies in envelope spectrum; housing warms" } }
+      ]
+    },
+    {
+      "id": "esp",
+      "kks": "1HTA10",
+      "kind": "precipitator",
+      "stage": "emissions",
+      "name": { "zh": "静电除尘器", "en": "Electrostatic precipitator" },
+      "principle": {
+        "zh": "高压电场使烟尘带电，被收尘极板吸附后振打落入灰斗。",
+        "en": "A high-voltage field charges dust particles, which collect on plates and are rapped into hoppers."
+      },
+      "position": [-155, 0, -133],
+      "size": [44, 22, 22],
+      "params": [
+        { "key": "outlet_dust_mg_m3", "name": { "zh": "出口烟尘浓度", "en": "Outlet dust" }, "unit": "mg/Nm³", "nominal": 8, "alarm_high": 10 },
+        { "key": "field_kv", "name": { "zh": "二次电压", "en": "Field voltage" }, "unit": "kV", "nominal": 65 }
+      ],
+      "failure_modes": [
+        { "id": "esp-field-trip", "name": { "zh": "电场跳闸", "en": "Field trip" }, "modalities": ["process"], "signature": { "zh": "二次电压骤降，出口粉尘升高", "en": "Field voltage drops; outlet dust rises" } }
+      ]
+    },
+    {
+      "id": "fgd",
+      "kks": "1HTD10",
+      "kind": "absorber",
+      "stage": "emissions",
+      "name": { "zh": "石灰石-石膏湿法脱硫塔", "en": "Limestone–gypsum FGD absorber" },
+      "principle": {
+        "zh": "烟气在吸收塔内与石灰石浆液逆流接触，SO₂ 被吸收生成石膏。",
+        "en": "Flue gas meets limestone slurry spray; SO₂ is absorbed and becomes gypsum."
+      },
+      "position": [-123, 0, -188],
+      "size": [18, 40, 18],
+      "params": [
+        { "key": "outlet_so2_mg_m3", "name": { "zh": "出口 SO₂", "en": "Outlet SO₂" }, "unit": "mg/Nm³", "nominal": 20, "alarm_high": 35 },
+        { "key": "slurry_ph", "name": { "zh": "浆液 pH", "en": "Slurry pH" }, "unit": "", "nominal": 5.4 }
+      ],
+      "failure_modes": [
+        { "id": "fgd-pump-cavitation", "name": { "zh": "循环泵汽蚀", "en": "Recirculation pump cavitation" }, "modalities": ["acoustic", "vibration", "process"], "signature": { "zh": "宽频噪声增大、流量波动", "en": "Broadband noise and fluctuating flow" } }
+      ]
+    },
+    {
+      "id": "chimney",
+      "kks": "1HNE10",
+      "kind": "chimney",
+      "stage": "emissions",
+      "name": { "zh": "烟囱", "en": "Chimney" },
+      "principle": { "zh": "净烟气经烟囱高空排放并在线监测排放。", "en": "Cleaned flue gas leaves at height under continuous emission monitoring." },
+      "position": [-95, 0, -188],
+      "size": [12, 180, 12],
+      "params": [
+        { "key": "nox_mg_m3", "name": { "zh": "NOₓ 排放", "en": "NOₓ emission" }, "unit": "mg/Nm³", "nominal": 35, "alarm_high": 50 }
+      ],
+      "failure_modes": []
+    },
+    {
+      "id": "hp-turbine",
+      "kks": "1MAA10",
+      "kind": "turbine",
+      "stage": "expansion",
+      "name": { "zh": "高压缸", "en": "HP turbine" },
+      "principle": {
+        "zh": "高温高压主蒸汽冲击叶片使转子旋转，排汽回锅炉再热。",
+        "en": "Main steam expands across blade rows and spins the rotor; exhaust returns to the boiler for reheat."
+      },
+      "position": [-185, 8, 4],
+      "size": [10, 6, 7],
+      "params": [
+        { "key": "inlet_mpa", "name": { "zh": "进汽压力", "en": "Inlet pressure" }, "unit": "MPa", "nominal": 24.2 },
+        { "key": "shaft_vibration_um", "name": { "zh": "轴振", "en": "Shaft vibration" }, "unit": "μm", "nominal": 40, "alarm_high": 125 }
+      ],
+      "failure_modes": [
+        { "id": "rotor-rub", "name": { "zh": "动静碰磨", "en": "Rotor rub" }, "modalities": ["vibration", "acoustic"], "signature": { "zh": "轴振增大并出现分数次谐波", "en": "Rising shaft vibration with sub-harmonics" } }
+      ]
+    },
+    {
+      "id": "ip-turbine",
+      "kks": "1MAB10",
+      "kind": "turbine",
+      "stage": "expansion",
+      "name": { "zh": "中压缸", "en": "IP turbine" },
+      "principle": { "zh": "再热蒸汽在中压缸继续膨胀做功。", "en": "Reheated steam expands further in the IP section." },
+      "position": [-173, 8, 4],
+      "size": [10, 6.5, 7.5],
+      "params": [
+        { "key": "inlet_c", "name": { "zh": "再热汽温", "en": "Reheat temperature" }, "unit": "°C", "nominal": 566 }
+      ],
+      "failure_modes": []
+    },
+    {
+      "id": "lp-turbine",
+      "kks": "1MAC10",
+      "kind": "turbine",
+      "stage": "expansion",
+      "name": { "zh": "低压缸", "en": "LP turbine" },
+      "principle": { "zh": "低压蒸汽在大尺寸末级叶片中膨胀到真空，排入凝汽器。", "en": "Low-pressure steam expands to vacuum across long last-stage blades into the condenser." },
+      "position": [-157, 8, 4],
+      "size": [18, 8, 10],
+      "params": [
+        { "key": "exhaust_c", "name": { "zh": "排汽温度", "en": "Exhaust temperature" }, "unit": "°C", "nominal": 33, "alarm_high": 80 }
+      ],
+      "failure_modes": [
+        { "id": "last-stage-erosion", "name": { "zh": "末级叶片水蚀", "en": "Last-stage blade erosion" }, "modalities": ["vibration", "process"], "signature": { "zh": "效率缓慢下降，振动趋势上升", "en": "Slow efficiency loss, rising vibration trend" } }
+      ]
+    },
+    {
+      "id": "generator",
+      "kks": "1MKA10",
+      "kind": "generator",
+      "stage": "generation",
+      "name": { "zh": "水氢氢冷汽轮发电机", "en": "Hydrogen-cooled turbogenerator" },
+      "principle": {
+        "zh": "直流励磁的转子以 3000 r/min 旋转，形成旋转磁场切割定子绕组，按法拉第电磁感应定律产生 50 Hz 三相交流电。",
+        "en": "The DC-excited rotor spins at 3000 rpm; its rotating field cuts the stator windings and, by Faraday's law, induces 50 Hz three-phase power."
+      },
+      "position": [-139, 8, 4],
+      "size": [14, 6, 6],
+      "params": [
+        { "key": "active_power_mw", "name": { "zh": "有功功率", "en": "Active power" }, "unit": "MW", "nominal": 660 },
+        { "key": "stator_temp_c", "name": { "zh": "定子绕组温度", "en": "Stator winding temperature" }, "unit": "°C", "nominal": 75, "alarm_high": 90 },
+        { "key": "h2_purity_pct", "name": { "zh": "氢气纯度", "en": "Hydrogen purity" }, "unit": "%", "nominal": 98, "alarm_low": 95 },
+        { "key": "h2_leak_ppm", "name": { "zh": "环境氢浓度", "en": "Ambient H₂" }, "unit": "ppm", "nominal": 0, "alarm_high": 1000 }
+      ],
+      "failure_modes": [
+        { "id": "stator-overheat", "name": { "zh": "定子过热", "en": "Stator overheating" }, "modalities": ["process", "infrared"], "signature": { "zh": "个别线棒温度偏高，冷却水流量下降", "en": "Individual bar temperatures high, cooling-water flow drops" } },
+        { "id": "h2-leak", "name": { "zh": "氢气泄漏", "en": "Hydrogen leak" }, "modalities": ["gas", "acoustic", "process"], "signature": { "zh": "补氢量增加、环境氢浓度升高", "en": "Make-up hydrogen rises; ambient H₂ detected" } }
+      ]
+    },
+    {
+      "id": "condenser",
+      "kks": "1MAG10",
+      "kind": "condenser",
+      "stage": "cycle",
+      "name": { "zh": "凝汽器", "en": "Condenser" },
+      "principle": {
+        "zh": "汽轮机排汽在管束外被循环冷却水冷凝成水，形成真空，提高循环效率。",
+        "en": "Turbine exhaust condenses on tubes cooled by circulating water, creating the vacuum that raises cycle efficiency."
+      },
+      "position": [-157, 0, 4],
+      "size": [18, 6, 12],
+      "params": [
+        { "key": "backpressure_kpa", "name": { "zh": "背压", "en": "Back-pressure" }, "unit": "kPa", "nominal": 4.9, "alarm_high": 13 },
+        { "key": "cw_delta_t_c", "name": { "zh": "循环水温升", "en": "Cooling-water temperature rise" }, "unit": "°C", "nominal": 9 }
+      ],
+      "failure_modes": [
+        { "id": "vacuum-loss", "name": { "zh": "真空下降", "en": "Vacuum degradation" }, "modalities": ["process", "acoustic"], "signature": { "zh": "背压升高、端差增大，可能有空气漏入啸声", "en": "Back-pressure and terminal difference rise; air in-leak hiss" } }
+      ]
+    },
+    {
+      "id": "condensate-pump",
+      "kks": "1LCB10",
+      "kind": "pump",
+      "stage": "cycle",
+      "name": { "zh": "凝结水泵", "en": "Condensate pump" },
+      "principle": { "zh": "把凝汽器热井中的凝结水升压送往低压加热器和除氧器。", "en": "Lifts condensate from the hotwell through LP heaters to the deaerator." },
+      "position": [-166, 0, 19],
+      "size": [3, 4, 3],
+      "params": [
+        { "key": "vibration_mm_s", "name": { "zh": "振动", "en": "Vibration" }, "unit": "mm/s", "nominal": 1.8, "alarm_high": 4.5 }
+      ],
+      "failure_modes": []
+    },
+    {
+      "id": "deaerator",
+      "kks": "1LAA10",
+      "kind": "tank",
+      "stage": "cycle",
+      "name": { "zh": "除氧器", "en": "Deaerator" },
+      "principle": { "zh": "用抽汽加热给水到饱和，析出溶解氧，防止管道腐蚀。", "en": "Extraction steam heats feedwater to saturation and strips dissolved oxygen to prevent corrosion." },
+      "position": [-173, 24, -20],
+      "size": [26, 4, 4],
+      "params": [
+        { "key": "o2_ppb", "name": { "zh": "出口溶解氧", "en": "Outlet dissolved O₂" }, "unit": "ppb", "nominal": 5, "alarm_high": 7 }
+      ],
+      "failure_modes": []
+    },
+    {
+      "id": "feedwater-pump",
+      "kks": "1LAC10",
+      "kind": "pump",
+      "stage": "cycle",
+      "name": { "zh": "汽动给水泵", "en": "Turbine-driven boiler feed pump" },
+      "principle": {
+        "zh": "由小汽轮机驱动，把给水升压到 30 MPa 以上送入锅炉。",
+        "en": "Driven by a small steam turbine, it raises feedwater above 30 MPa into the boiler."
+      },
+      "position": [-183, 0, -22],
+      "size": [8, 4, 4],
+      "params": [
+        { "key": "discharge_mpa", "name": { "zh": "出口压力", "en": "Discharge pressure" }, "unit": "MPa", "nominal": 31 },
+        { "key": "vibration_mm_s", "name": { "zh": "轴承振动", "en": "Bearing vibration" }, "unit": "mm/s", "nominal": 2.0, "alarm_high": 4.5 },
+        { "key": "bearing_temp_c", "name": { "zh": "轴承温度", "en": "Bearing temperature" }, "unit": "°C", "nominal": 60, "alarm_high": 85 }
+      ],
+      "failure_modes": [
+        { "id": "fwp-bearing-wear", "name": { "zh": "轴承磨损", "en": "Bearing wear" }, "modalities": ["vibration", "acoustic", "infrared"], "signature": { "zh": "包络谱出现外圈/内圈故障频率，异响与温升", "en": "Outer/inner race frequencies, abnormal sound and heating" } },
+        { "id": "fwp-seal-leak", "name": { "zh": "机械密封泄漏", "en": "Mechanical seal leak" }, "modalities": ["visible", "infrared"], "signature": { "zh": "密封处滴漏、蒸汽雾", "en": "Drips and vapour at the seal" } }
+      ]
+    },
+    {
+      "id": "hp-heaters",
+      "kks": "1LAD10",
+      "kind": "heater",
+      "stage": "cycle",
+      "name": { "zh": "高压加热器", "en": "HP feedwater heaters" },
+      "principle": { "zh": "用汽轮机抽汽加热给水，回收热量，提升循环效率。", "en": "Extraction steam preheats feedwater, recovering heat and raising efficiency." },
+      "position": [-204, 4, -22],
+      "size": [12, 3, 3],
+      "params": [
+        { "key": "outlet_c", "name": { "zh": "给水温度", "en": "Feedwater temperature" }, "unit": "°C", "nominal": 282 }
+      ],
+      "failure_modes": [
+        { "id": "heater-tube-leak", "name": { "zh": "管束泄漏", "en": "Tube leak" }, "modalities": ["process"], "signature": { "zh": "疏水水位升高、给水温度下降", "en": "Drain level rises; feedwater temperature falls" } }
+      ]
+    },
+    {
+      "id": "cw-pump",
+      "kks": "1PAC10",
+      "kind": "pump",
+      "stage": "cycle",
+      "name": { "zh": "循环水泵", "en": "Circulating water pump" },
+      "principle": { "zh": "把冷却塔水池中的水送到凝汽器，吸热后回到冷却塔。", "en": "Moves basin water to the condenser and back to the cooling tower." },
+      "position": [-168, 0, 65],
+      "size": [5, 6, 5],
+      "params": [
+        { "key": "flow_m3_h", "name": { "zh": "流量", "en": "Flow" }, "unit": "m³/h", "nominal": 36000 },
+        { "key": "vibration_mm_s", "name": { "zh": "振动", "en": "Vibration" }, "unit": "mm/s", "nominal": 2.3, "alarm_high": 4.5 }
+      ],
+      "failure_modes": [
+        { "id": "cw-pump-cavitation", "name": { "zh": "汽蚀", "en": "Cavitation" }, "modalities": ["acoustic", "vibration"], "signature": { "zh": "高频噪声和振动随机冲击", "en": "High-frequency noise and random vibration impacts" } }
+      ]
+    },
+    {
+      "id": "cooling-tower",
+      "kks": "1URA10",
+      "kind": "cooling_tower",
+      "stage": "cycle",
+      "name": { "zh": "自然通风冷却塔", "en": "Natural-draft cooling tower" },
+      "principle": { "zh": "热水在塔内淋洒，部分蒸发带走热量，塔内热空气上升形成自然抽风。", "en": "Hot water rains through fill; evaporation removes heat and warm air rises as natural draft." },
+      "position": [-285, 0, 185],
+      "size": [100, 140, 100],
+      "params": [
+        { "key": "basin_c", "name": { "zh": "出塔水温", "en": "Basin water temperature" }, "unit": "°C", "nominal": 22 }
+      ],
+      "failure_modes": [
+        { "id": "fill-blockage", "name": { "zh": "填料堵塞或破损", "en": "Fill blockage / damage" }, "modalities": ["infrared", "visible", "process"], "signature": { "zh": "塔内红外温度分布不均，出塔水温升高", "en": "Uneven IR pattern and warmer basin water" } }
+      ]
+    },
+    {
+      "id": "main-transformer",
+      "kks": "1BAT10",
+      "kind": "transformer",
+      "stage": "grid",
+      "name": { "zh": "主变压器", "en": "Generator step-up transformer" },
+      "principle": {
+        "zh": "利用电磁感应，原副绕组匝数比把 20 kV 升到 500 kV，降低输电电流和线损。",
+        "en": "Electromagnetic induction with a winding turns ratio raises 20 kV to 500 kV, cutting line current and losses."
+      },
+      "position": [-137, 0, 66],
+      "size": [14, 10, 8],
+      "params": [
+        { "key": "top_oil_c", "name": { "zh": "顶层油温", "en": "Top-oil temperature" }, "unit": "°C", "nominal": 65, "alarm_high": 85 },
+        { "key": "load_mva", "name": { "zh": "负荷", "en": "Load" }, "unit": "MVA", "nominal": 700 },
+        { "key": "h2_ppm", "name": { "zh": "油中氢气", "en": "Dissolved H₂" }, "unit": "μL/L", "nominal": 20, "alarm_high": 150 },
+        { "key": "c2h2_ppm", "name": { "zh": "油中乙炔", "en": "Dissolved C₂H₂" }, "unit": "μL/L", "nominal": 0.1, "alarm_high": 1 }
+      ],
+      "failure_modes": [
+        { "id": "xfmr-overheat", "name": { "zh": "局部过热", "en": "Local overheating" }, "modalities": ["infrared", "dga", "process"], "signature": { "zh": "红外热点，CH₄/C₂H₄ 上升（Duval T2/T3 区）", "en": "IR hotspot; CH₄/C₂H₄ rising (Duval zone T2/T3)" } },
+        { "id": "xfmr-arcing", "name": { "zh": "内部放电", "en": "Internal arcing" }, "modalities": ["dga", "acoustic", "partial_discharge"], "signature": { "zh": "C₂H₂ 突增（Duval D1/D2 区），局放超声信号", "en": "C₂H₂ jump (Duval D1/D2), ultrasonic PD signal" } },
+        { "id": "xfmr-oil-leak", "name": { "zh": "渗漏油", "en": "Oil leak" }, "modalities": ["visible"], "signature": { "zh": "法兰下方油迹、油位下降", "en": "Oil stains below flanges, falling oil level" } }
+      ]
+    },
+    {
+      "id": "switchyard",
+      "kks": "1ADA10",
+      "kind": "switchyard",
+      "stage": "grid",
+      "name": { "zh": "500 kV GIS 开关站", "en": "500 kV GIS switchyard" },
+      "principle": { "zh": "SF₆ 气体绝缘的断路器、隔离开关把电能分配到出线，故障时快速切除。", "en": "SF₆-insulated breakers and disconnectors route power to the lines and clear faults quickly." },
+      "position": [0, 0, 178],
+      "size": [140, 12, 96],
+      "params": [
+        { "key": "sf6_density_mpa", "name": { "zh": "SF₆ 密度", "en": "SF₆ density" }, "unit": "MPa", "nominal": 0.6, "alarm_low": 0.55 },
+        { "key": "pd_dbm", "name": { "zh": "特高频局放", "en": "UHF partial discharge" }, "unit": "dBm", "nominal": -70, "alarm_high": -45 }
+      ],
+      "failure_modes": [
+        { "id": "gis-pd", "name": { "zh": "GIS 局部放电", "en": "GIS partial discharge" }, "modalities": ["partial_discharge", "acoustic"], "signature": { "zh": "特高频信号相位聚集，超声幅值升高", "en": "Phase-clustered UHF pulses, rising ultrasonic level" } },
+        { "id": "sf6-leak", "name": { "zh": "SF₆ 泄漏", "en": "SF₆ leak" }, "modalities": ["gas", "infrared", "process"], "signature": { "zh": "密度缓降，红外成像可见气体羽流", "en": "Slow density decay; gas plume in IR imaging" } }
+      ]
+    },
+    {
+      "id": "transmission-line",
+      "kks": "1AEA10",
+      "kind": "line",
+      "stage": "grid",
+      "name": { "zh": "500 kV 出线与绝缘子", "en": "500 kV outgoing line and insulators" },
+      "principle": { "zh": "架空线路把电能送往电网，绝缘子串把带电导线与铁塔隔离。", "en": "Overhead conductors carry power to the grid; insulator strings isolate them from the towers." },
+      "position": [78, 0, 226],
+      "size": [12, 50, 12],
+      "params": [
+        { "key": "line_current_a", "name": { "zh": "线路电流", "en": "Line current" }, "unit": "A", "nominal": 790 }
+      ],
+      "failure_modes": [
+        { "id": "insulator-flashover", "name": { "zh": "绝缘子污闪/破损", "en": "Insulator contamination / damage" }, "modalities": ["visible", "infrared", "acoustic"], "signature": { "zh": "可见光缺片、红外零值发热、电晕放电声", "en": "Missing discs in video, IR heating, corona noise" } }
+      ]
+    },
+    {
+      "id": "control-room",
+      "kks": "1CWA10",
+      "kind": "building",
+      "stage": "generation",
+      "name": { "zh": "集控室（DCS）", "en": "Central control room (DCS)" },
+      "principle": { "zh": "分散控制系统采集全厂测点，协调锅炉、汽轮机和发电机运行。", "en": "The distributed control system gathers plant signals and coordinates boiler, turbine and generator." },
+      "position": [0, 0, 63],
+      "size": [48, 12, 24],
+      "params": [],
+      "failure_modes": [
+        { "id": "ppe-violation", "name": { "zh": "作业人员未佩戴防护用品", "en": "Missing personal protective equipment" }, "modalities": ["visible"], "signature": { "zh": "生产区域人员未戴安全帽或未穿工作服", "en": "Person in a production area without helmet or workwear" } }
+      ]
+    }
+  ],
+  "flows": [
+    { "from": "coal-yard", "to": "coal-conveyor", "medium": "coal" },
+    { "from": "coal-conveyor", "to": "coal-mill", "medium": "coal" },
+    { "from": "coal-mill", "to": "boiler", "medium": "coal" },
+    { "from": "fd-fan", "to": "boiler", "medium": "air" },
+    { "from": "boiler", "to": "esp", "medium": "flue_gas" },
+    { "from": "esp", "to": "id-fan", "medium": "flue_gas" },
+    { "from": "id-fan", "to": "fgd", "medium": "flue_gas" },
+    { "from": "fgd", "to": "chimney", "medium": "flue_gas" },
+    { "from": "boiler", "to": "hp-turbine", "medium": "steam" },
+    { "from": "hp-turbine", "to": "boiler", "medium": "steam", "note": "cold reheat" },
+    { "from": "boiler", "to": "ip-turbine", "medium": "steam", "note": "hot reheat" },
+    { "from": "ip-turbine", "to": "lp-turbine", "medium": "steam" },
+    { "from": "lp-turbine", "to": "condenser", "medium": "steam" },
+    { "from": "lp-turbine", "to": "generator", "medium": "shaft" },
+    { "from": "condenser", "to": "condensate-pump", "medium": "water" },
+    { "from": "condensate-pump", "to": "deaerator", "medium": "water" },
+    { "from": "deaerator", "to": "feedwater-pump", "medium": "water" },
+    { "from": "feedwater-pump", "to": "hp-heaters", "medium": "water" },
+    { "from": "hp-heaters", "to": "boiler", "medium": "water" },
+    { "from": "cw-pump", "to": "condenser", "medium": "cooling_water" },
+    { "from": "condenser", "to": "cooling-tower", "medium": "cooling_water" },
+    { "from": "cooling-tower", "to": "cw-pump", "medium": "cooling_water" },
+    { "from": "generator", "to": "main-transformer", "medium": "power" },
+    { "from": "main-transformer", "to": "switchyard", "medium": "power" },
+    { "from": "switchyard", "to": "transmission-line", "medium": "power" }
+  ],
+  "modalities": [
+    { "id": "visible", "name": { "zh": "可见光视频", "en": "Visible video" } },
+    { "id": "infrared", "name": { "zh": "红外热成像", "en": "Infrared thermography" } },
+    { "id": "acoustic", "name": { "zh": "声学", "en": "Acoustic" } },
+    { "id": "vibration", "name": { "zh": "振动", "en": "Vibration" } },
+    { "id": "gas", "name": { "zh": "气体检测", "en": "Gas detection" } },
+    { "id": "dga", "name": { "zh": "油色谱", "en": "Dissolved gas analysis" } },
+    { "id": "partial_discharge", "name": { "zh": "局部放电", "en": "Partial discharge" } },
+    { "id": "process", "name": { "zh": "DCS 过程量", "en": "DCS process data" } }
+  ]
+}

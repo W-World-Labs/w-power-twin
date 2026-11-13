@@ -1,0 +1,21 @@
+[package]
+name = "w-power-twin"
+version = "0.1.1"
+edition = "2024"
+publish = false
+license = "MIT"
+
+[dependencies]
+anyhow = "1"
+axum = "0.8"
+reqwest = { version = "0.13", default-features = false, features = ["json", "rustls-no-provider"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "net", "signal"] }
+tower-http = { version = "0.6.11", features = ["fs"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+xradar = { version = "=0.3.11", git = "https://github.com/W-World-Labs/w-radar", rev = "579174832c5de9a1b606f82084171b3965deae56", default-features = false, features = ["axum"] }
+
+[dev-dependencies]
+tower = { version = "0.5", features = ["util"] }

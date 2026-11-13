@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "source": "W-authored Power Twin educational synthetic application",
+  "version": "0.1.1",
+  "distribution": "Complete five-scene synthetic power-plant twin application source: thermal, onshore/offshore wind, PV and molten-salt tower CSP; external assets and datasets are not bundled",
+  "history": "new independent public root; private source history and identifiers not imported",
+  "license": "MIT for W-authored application, synthetic catalogs and documentation; separate upstream MIT notice retained",
+  "authors": [
+    "kanshan",
+    "zots0127"
+  ],
+  "public_dependencies": {
+    "w-radar": {
+      "url": "https://github.com/W-World-Labs/w-radar",
+      "rev": "579174832c5de9a1b606f82084171b3965deae56"
+    }
+  },
+  "transformations": [
+    "Actual w-cli 1.5.21 github export, followed by explicit source-boundary review.",
+    "Preserve every original synthetic simulation, catalog, frontend implementation and all 18 original Rust test declarations.",
+    "Replace the private xradar registry package with its immutable public implementation; preserve optional backend capture and require operator endpoint.",
+    "Replace production browser telemetry binding with explicit operator build opt-in and non-secret configuration.",
+    "Exclude deployment wiring, private instructions/history, reference image, downloaded assets and asset runtime lock.",
+    "Keep external source/author/licence citations; default datasets to not fetched pending separate permission review."
+  ],
+  "external_material": "References and upstream-declared licence labels only; no asset/dataset redistribution grant is inferred. No customer plant data or equipment controls are included.",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "8da379ed9b252515c39deb57db7303fd635013c30482b065a4d33df6107b257c"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "f2de40037f682dc53b45c57024e77035a10571abbd0cfd3e5663acce5be29943"
+    },
+    {
+      "path": ".gitleaks.toml",
+      "sha256": "4183034cb0d7c52bca22dac1d67090640f02a9e1785be23978774e9c8d7ea6df"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "a9cd11f1fcdff263b9359973bb7c6d7bc1ca255588d142764570570bf2850ff4"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "8fa752d6c57439345b0e66d2abd3a57401489bccaf176ff13cfba027221b8e50"
+    },
+    {
+      "path": "README.md",
+      "sha256": "dddf8ac6d71545df1def5d1f0a14bd8fb4b0621fc5e95401beeaf1d02938ee2d"
+    },
+    {
+      "path": "THIRD-PARTY-NOTICES.md",
+      "sha256": "68e760d3ce3c04fe60cc9d75c4568716c9c53cba523c0a141c9fb4984f483107"
+    },
+    {
+      "path": "data/plant.json",
+      "sha256": "b124514fd6435fac1d84782f06decee8935b2e09c4ccb805ad478b62a15dd2d4"
+    },
+    {
+      "path": "data/renewables.json",
+      "sha256": "1fc109516513b2b8b4c3849fa8f62a0b9b2f977b3b61c74b08c1e5b54273458d"
+    },
+    {
+      "path": "data/sources.json",
+      "sha256": "23c9aa4f233a652e03351589291917f011d25ada82cf31a6895bbb5d55bb4fee"
+    },
+    {
+      "path": "frontend/index.html",
+      "sha256": "1151bdbd9f3a854ae55d53cb823a4b12c63ca56c367972a329032d58b2309774"
+    },
+    {
+      "path": "frontend/package-lock.json",
+      "sha256": "2505d4f8d0cbb7214fdb5d17594951c57540e8f5ca25186458662b7420310625"
+    },
+    {
+      "path": "frontend/package.json",
+      "sha256": "0064e9b5a1f8e47831fc2dc182afec13ee0258c59e91152bb41d0242b4747b6b"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "sha256": "0a263e2edd7db5c3a7d1df9e68041c4bc5457e4e2aeebb1911b6fed4812053c0"
+    },
+    {
+      "path": "frontend/src/CspScene.tsx",
+      "sha256": "bd3928fab2f1ce2fe117b47ac50cba091851fa800965689f3b59e99604d45530"
+    },
+    {
+      "path": "frontend/src/Dashboard.tsx",
+      "sha256": "d3cb8fb200ace1aa18f19bbef1c93bace4c0118de08ab11c24fd30084f1aa03d"
+    },
+    {
+      "path": "frontend/src/RenewableScene.tsx",
+      "sha256": "a524dc50d9123a1aacb245869261974eadc5c73e338708afad82f68567a1bfc0"
+    },
+    {
+      "path": "frontend/src/Scene.tsx",
+      "sha256": "4bd895a824326542c439b5266adf97058f4f7ce9b12ec4075287a322d7797e28"
+    },
+    {
+      "path": "frontend/src/Site.tsx",
+      "sha256": "1e61e69f54e17335e0b3d5e41162928b9b8bd4536251041e8cf8e2da28702cef"
+    },
+    {
+      "path": "frontend/src/devices.tsx",
+      "sha256": "639f68c061b2718e2731e9fca8df7740c331d31afa14882bd1748e00ef2d1df7"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "sha256": "a6bcae9c4f04d6ff36406b2966379834342b41b08b83ba7bd0334712d6cf87f0"
+    },
+    {
+      "path": "frontend/src/models.tsx",
+      "sha256": "0df47ea280397a613b784c9a229c87bc7fcd7d02875175c55e4a4b53b5e3af4e"
+    },
+    {
+      "path": "frontend/src/scenes.ts",
+      "sha256": "69e1af6c7756b86d310c3d6f54acf6f8358f32592d56b920a7fba55abfaa7f0b"
+    },
+    {
+      "path": "frontend/src/styles.css",
+      "sha256": "bc2e86fa247dfe7c4f85f2a91aab14a23e4b5518f19b742b46053e21757d30e5"
+    },
+    {
+      "path": "frontend/src/telemetry.ts",
+      "sha256": "b0f89f52aaedfb82cb8a239a8420070077d447fe02c139fcca5cd2e565c742c8"
+    },
+    {
+      "path": "frontend/src/text.tsx",
+      "sha256": "f617e22acc56ef07b282ff0e66d63d173b85b15a3f3be6444827c8a027c7b335"
+    },
+    {
+      "path": "frontend/src/types.ts",
+      "sha256": "b5de7f62cdd7561df2b9a9d3fccc78a2d8507c1759802b2417f610fa29ce8247"
+    },
+    {
+      "path": "frontend/tsconfig.json",
+      "sha256": "7273429c0c7c10c1d537c0b891fb47dc7897f5e5cad9cef1b3de275f4ab6d9c7"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "sha256": "5fd80a104f9c0f293df446122b382b06e1173b04d27700fc94e1078e78cab375"
+    },
+    {
+      "path": "licenses/webgl-constants-MIT.txt",
+      "sha256": "0969fa65680b694452c2c65981df14af5c192da24f2b1f87bdd51d8ed24efcfa"
+    },
+    {
+      "path": "scripts/fetch_assets.py",
+      "sha256": "89f9e36b7e205aba53d50d7651b837a43c8f4ccff00568546f59865f8477b0e3"
+    },
+    {
+      "path": "scripts/optimize_models.sh",
+      "sha256": "a017f86272dad0f96d639bca48e06698d80fd7b07d4c12e8a08d780f350af3e1"
+    },
+    {
+      "path": "scripts/source-artifact.py",
+      "sha256": "e27bea90dd5d54063d9317fe88d741b7bf505ffe3073a72e2df2044c24128cdf"
+    },
+    {
+      "path": "server/Cargo.lock",
+      "sha256": "a73f3f7d65c1427429dba1a52194b99f09a0531b93b415db0a6177325fb3474a"
+    },
+    {
+      "path": "server/Cargo.toml",
+      "sha256": "ab94425ef6ec87aea753756944f9df56760f9e94468a4fdf47455793015ec438"
+    },
+    {
+      "path": "server/src/catalogs.rs",
+      "sha256": "69e42e66f1578f6b4324fca610fb6c910c79c3cbe43074566ed5e530098feb10"
+    },
+    {
+      "path": "server/src/csp.rs",
+      "sha256": "e8467d648f3d3bf7c319bd5d47dc516b4424ccff886a7362254cdcc4ac4214ba"
+    },
+    {
+      "path": "server/src/main.rs",
+      "sha256": "aa1c45c790858742f3e803f2a54c5915058a65dbefedc527815ac56923fc3fe3"
+    },
+    {
+      "path": "server/src/plant.rs",
+      "sha256": "22a925c761c04336ec4112fb767f81bcd80669cfa8d4f7d84de30c8220df7f25"
+    },
+    {
+      "path": "server/src/radar.rs",
+      "sha256": "9b76a050a8ba7ab3cd29a6789db0665173edf4bf58a660e8c953968962b5511b"
+    },
+    {
+      "path": "server/src/renewable.rs",
+      "sha256": "4c2d19d18ae302f0a0cdcef57976a7ab291d02733dd5a4bb5fe3bb2a946e8782"
+    },
+    {
+      "path": "server/src/telemetry.rs",
+      "sha256": "169f7a8206d3529a88ee681a2e89bdb239704c1b63fe1f3c85323ca3c7c56694"
+    }
+  ]
+}

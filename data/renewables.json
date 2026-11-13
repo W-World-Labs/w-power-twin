@@ -1,0 +1,6569 @@
+{
+  "onshore": {
+    "id": "onshore",
+    "plant": {
+      "name": {
+        "zh": "60 MW 陆上风电集群",
+        "en": "60 MW onshore wind cluster"
+      },
+      "summary": {
+        "zh": "合成演示场景，装机容量与地理布置为示意；各分区单独计算出力、损耗与异常特征。",
+        "en": "Synthetic demo with illustrative capacity and layout; unit outputs, losses and anomaly features share a process model."
+      },
+      "rated": {
+        "capacity_mw": 60,
+        "dc_capacity_mwp": 0,
+        "unit_count": 12,
+        "unit_mw": 5,
+        "grid_kv": 220,
+        "collection_kv": 35,
+        "cut_in_ms": 3,
+        "rated_wind_ms": 12,
+        "cut_out_ms": 25,
+        "dc_ac_ratio": 1.2,
+        "inverter_efficiency": 0.975,
+        "pv_temp_coefficient": -0.0035,
+        "ambient_c": 25
+      }
+    },
+    "site": {
+      "bounds": [
+        1500,
+        1400
+      ],
+      "units": [],
+      "secondary_stack": [
+        0,
+        0,
+        0
+      ],
+      "storage_tanks": [
+        0,
+        0,
+        0
+      ],
+      "camera": {
+        "position": [
+          1150,
+          850,
+          1180
+        ],
+        "target": [
+          20,
+          50,
+          25
+        ]
+      }
+    },
+    "stages": [
+      {
+        "id": "generation",
+        "order": 1,
+        "name": {
+          "zh": "风力发电",
+          "en": "Wind generation"
+        },
+        "conversion": {
+          "zh": "风能 → 轴功 → 电能",
+          "en": "Wind → shaft → electricity"
+        }
+      },
+      {
+        "id": "collection",
+        "order": 2,
+        "name": {
+          "zh": "集电系统",
+          "en": "Collection system"
+        },
+        "conversion": {
+          "zh": "机组 → 35 kV",
+          "en": "Turbines → 35 kV"
+        }
+      },
+      {
+        "id": "grid",
+        "order": 3,
+        "name": {
+          "zh": "升压与送出",
+          "en": "Step-up & export"
+        },
+        "conversion": {
+          "zh": "集电母线 → 220 kV 电网",
+          "en": "Collector bus → 220 kV grid"
+        }
+      }
+    ],
+    "devices": [
+      {
+        "id": "wtg-01",
+        "kks": "WTG-01",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 01",
+          "en": "WTG 01"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -450.0,
+          0,
+          -330.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "bearing-wear",
+            "name": {
+              "zh": "风机轴承磨损",
+              "en": "Turbine bearing wear"
+            },
+            "modalities": [
+              "infrared",
+              "vibration",
+              "acoustic"
+            ],
+            "signature": {
+              "zh": "轴承退化同时引起温升、振动和声学特征",
+              "en": "Bearing wear raises heat, vibration and acoustic features"
+            }
+          },
+          {
+            "id": "blade-icing",
+            "name": {
+              "zh": "叶片覆冰",
+              "en": "Blade icing"
+            },
+            "modalities": [
+              "process",
+              "vibration"
+            ],
+            "signature": {
+              "zh": "同一覆冰状态导致出力偏差和振动升高",
+              "en": "Icing drives power deficit and vibration"
+            }
+          }
+        ]
+      },
+      {
+        "id": "wtg-02",
+        "kks": "WTG-02",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 02",
+          "en": "WTG 02"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -150.0,
+          0,
+          -330.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-03",
+        "kks": "WTG-03",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 03",
+          "en": "WTG 03"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          150.0,
+          0,
+          -330.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-04",
+        "kks": "WTG-04",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 04",
+          "en": "WTG 04"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          450.0,
+          0,
+          -330.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-05",
+        "kks": "WTG-05",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 05",
+          "en": "WTG 05"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -450.0,
+          0,
+          0.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-06",
+        "kks": "WTG-06",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 06",
+          "en": "WTG 06"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -150.0,
+          0,
+          0.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-07",
+        "kks": "WTG-07",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 07",
+          "en": "WTG 07"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          150.0,
+          0,
+          0.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-08",
+        "kks": "WTG-08",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 08",
+          "en": "WTG 08"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          450.0,
+          0,
+          0.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-09",
+        "kks": "WTG-09",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 09",
+          "en": "WTG 09"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -450.0,
+          0,
+          330.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-10",
+        "kks": "WTG-10",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 10",
+          "en": "WTG 10"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -150.0,
+          0,
+          330.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-11",
+        "kks": "WTG-11",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 11",
+          "en": "WTG 11"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          150.0,
+          0,
+          330.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-12",
+        "kks": "WTG-12",
+        "kind": "wind-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 12",
+          "en": "WTG 12"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          450.0,
+          0,
+          330.0
+        ],
+        "size": [
+          120,
+          150,
+          120
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 12
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "collector",
+        "kks": "COLLECTOR",
+        "kind": "collector",
+        "stage": "collection",
+        "name": {
+          "zh": "集电站",
+          "en": "Collector station"
+        },
+        "principle": {
+          "zh": "各发电单元汇入集电母线，由主变升压后送出。",
+          "en": "Generation units feed the collector bus before step-up and export."
+        },
+        "position": [
+          480,
+          0,
+          490
+        ],
+        "size": [
+          60,
+          9,
+          42
+        ],
+        "params": [
+          {
+            "key": "voltage_kv",
+            "name": {
+              "zh": "集电电压",
+              "en": "Collector voltage"
+            },
+            "unit": "kV",
+            "nominal": 35
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "汇集功率",
+              "en": "Collected power"
+            },
+            "unit": "MW",
+            "nominal": 60
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "main-transformer",
+        "kks": "MAIN-TRANSFORMER",
+        "kind": "transformer",
+        "stage": "grid",
+        "name": {
+          "zh": "主变压器",
+          "en": "Main transformer"
+        },
+        "principle": {
+          "zh": "主变把集电侧交流电升至 220 kV；温度与 DGA 由同一合成热状态驱动。",
+          "en": "Transformer raises collector voltage to 220 kV; one synthetic heat state drives temperature and DGA."
+        },
+        "position": [
+          480,
+          0,
+          502
+        ],
+        "size": [
+          14,
+          10,
+          8
+        ],
+        "params": [
+          {
+            "key": "top_oil_c",
+            "name": {
+              "zh": "顶层油温",
+              "en": "Top oil temperature"
+            },
+            "unit": "°C",
+            "nominal": 60,
+            "alarm_high": 85
+          },
+          {
+            "key": "h2_ppm",
+            "name": {
+              "zh": "溶解氢",
+              "en": "Dissolved hydrogen"
+            },
+            "unit": "μL/L",
+            "nominal": 20,
+            "alarm_high": 150
+          },
+          {
+            "key": "load_mva",
+            "name": {
+              "zh": "负载",
+              "en": "Loading"
+            },
+            "unit": "MVA",
+            "nominal": 61.224489795918366
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "xfmr-overheat",
+            "name": {
+              "zh": "主变过热",
+              "en": "Transformer overheating"
+            },
+            "modalities": [
+              "process",
+              "infrared",
+              "dga"
+            ],
+            "signature": {
+              "zh": "温升和 DGA 同源",
+              "en": "Heat and DGA share one state"
+            }
+          }
+        ]
+      },
+      {
+        "id": "transmission-line",
+        "kks": "TRANSMISSION-LINE",
+        "kind": "line",
+        "stage": "grid",
+        "name": {
+          "zh": "220 kV 并网线路",
+          "en": "220 kV grid connection"
+        },
+        "principle": {
+          "zh": "三相线路把净出力送入电网，电流按上网功率、电压和功率因数计算。",
+          "en": "Three-phase line exports net power; current follows export, voltage and power factor."
+        },
+        "position": [
+          570,
+          0,
+          490
+        ],
+        "size": [
+          20,
+          50,
+          14
+        ],
+        "params": [
+          {
+            "key": "line_current_a",
+            "name": {
+              "zh": "线路电流",
+              "en": "Line current"
+            },
+            "unit": "A",
+            "nominal": 160.6726166575953
+          },
+          {
+            "key": "voltage_kv",
+            "name": {
+              "zh": "并网电压",
+              "en": "Grid voltage"
+            },
+            "unit": "kV",
+            "nominal": 220
+          }
+        ],
+        "failure_modes": []
+      }
+    ],
+    "flows": [
+      {
+        "from": "wtg-01",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-02",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-03",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-04",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-05",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-06",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-07",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-08",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-09",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-10",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-11",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-12",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "collector",
+        "to": "main-transformer",
+        "medium": "power"
+      },
+      {
+        "from": "main-transformer",
+        "to": "transmission-line",
+        "medium": "power"
+      }
+    ],
+    "modalities": [
+      {
+        "id": "visible",
+        "name": {
+          "zh": "可见光视频",
+          "en": "Visible video"
+        }
+      },
+      {
+        "id": "infrared",
+        "name": {
+          "zh": "红外热成像",
+          "en": "Infrared thermography"
+        }
+      },
+      {
+        "id": "acoustic",
+        "name": {
+          "zh": "声学",
+          "en": "Acoustic"
+        }
+      },
+      {
+        "id": "vibration",
+        "name": {
+          "zh": "振动",
+          "en": "Vibration"
+        }
+      },
+      {
+        "id": "gas",
+        "name": {
+          "zh": "气体检测",
+          "en": "Gas detection"
+        }
+      },
+      {
+        "id": "dga",
+        "name": {
+          "zh": "油色谱",
+          "en": "Dissolved gas analysis"
+        }
+      },
+      {
+        "id": "partial_discharge",
+        "name": {
+          "zh": "局部放电",
+          "en": "Partial discharge"
+        }
+      },
+      {
+        "id": "process",
+        "name": {
+          "zh": "DCS 过程量",
+          "en": "DCS process data"
+        }
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "normal",
+        "name": {
+          "zh": "正常运行",
+          "en": "Normal operation"
+        }
+      },
+      {
+        "id": "bearing-wear",
+        "name": {
+          "zh": "风机轴承磨损",
+          "en": "Turbine bearing wear"
+        }
+      },
+      {
+        "id": "blade-icing",
+        "name": {
+          "zh": "叶片覆冰",
+          "en": "Blade icing"
+        }
+      },
+      {
+        "id": "high-wind",
+        "name": {
+          "zh": "大风切出",
+          "en": "High-wind cut-out"
+        }
+      },
+      {
+        "id": "xfmr-overheat",
+        "name": {
+          "zh": "主变过热",
+          "en": "Transformer overheating"
+        }
+      }
+    ]
+  },
+  "offshore": {
+    "id": "offshore",
+    "plant": {
+      "name": {
+        "zh": "192 MW 海上风电集群",
+        "en": "192 MW offshore wind cluster"
+      },
+      "summary": {
+        "zh": "合成演示场景，装机容量与地理布置为示意；各分区单独计算出力、损耗与异常特征。",
+        "en": "Synthetic demo with illustrative capacity and layout; unit outputs, losses and anomaly features share a process model."
+      },
+      "rated": {
+        "capacity_mw": 192,
+        "dc_capacity_mwp": 0,
+        "unit_count": 16,
+        "unit_mw": 12,
+        "grid_kv": 220,
+        "collection_kv": 66,
+        "cut_in_ms": 3,
+        "rated_wind_ms": 12,
+        "cut_out_ms": 25,
+        "dc_ac_ratio": 1.2,
+        "inverter_efficiency": 0.975,
+        "pv_temp_coefficient": -0.0035,
+        "ambient_c": 25
+      }
+    },
+    "site": {
+      "bounds": [
+        2600,
+        2800
+      ],
+      "units": [],
+      "secondary_stack": [
+        0,
+        0,
+        0
+      ],
+      "storage_tanks": [
+        0,
+        0,
+        0
+      ],
+      "camera": {
+        "position": [
+          1950,
+          1650,
+          2150
+        ],
+        "target": [
+          150,
+          20,
+          280
+        ]
+      }
+    },
+    "stages": [
+      {
+        "id": "generation",
+        "order": 1,
+        "name": {
+          "zh": "风力发电",
+          "en": "Wind generation"
+        },
+        "conversion": {
+          "zh": "风能 → 轴功 → 电能",
+          "en": "Wind → shaft → electricity"
+        }
+      },
+      {
+        "id": "collection",
+        "order": 2,
+        "name": {
+          "zh": "集电系统",
+          "en": "Collection system"
+        },
+        "conversion": {
+          "zh": "机组 → 66 kV",
+          "en": "Turbines → 66 kV"
+        }
+      },
+      {
+        "id": "grid",
+        "order": 3,
+        "name": {
+          "zh": "升压与送出",
+          "en": "Step-up & export"
+        },
+        "conversion": {
+          "zh": "集电母线 → 220 kV 电网",
+          "en": "Collector bus → 220 kV grid"
+        }
+      }
+    ],
+    "devices": [
+      {
+        "id": "wtg-01",
+        "kks": "WTG-01",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 01",
+          "en": "WTG 01"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -630.0,
+          0,
+          -630.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "bearing-wear",
+            "name": {
+              "zh": "风机轴承磨损",
+              "en": "Turbine bearing wear"
+            },
+            "modalities": [
+              "infrared",
+              "vibration",
+              "acoustic"
+            ],
+            "signature": {
+              "zh": "轴承退化同时引起温升、振动和声学特征",
+              "en": "Bearing wear raises heat, vibration and acoustic features"
+            }
+          }
+        ]
+      },
+      {
+        "id": "wtg-02",
+        "kks": "WTG-02",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 02",
+          "en": "WTG 02"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -210.0,
+          0,
+          -630.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-03",
+        "kks": "WTG-03",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 03",
+          "en": "WTG 03"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          210.0,
+          0,
+          -630.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-04",
+        "kks": "WTG-04",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 04",
+          "en": "WTG 04"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          630.0,
+          0,
+          -630.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-05",
+        "kks": "WTG-05",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 05",
+          "en": "WTG 05"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -630.0,
+          0,
+          -210.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-06",
+        "kks": "WTG-06",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 06",
+          "en": "WTG 06"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -210.0,
+          0,
+          -210.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-07",
+        "kks": "WTG-07",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 07",
+          "en": "WTG 07"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          210.0,
+          0,
+          -210.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-08",
+        "kks": "WTG-08",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 08",
+          "en": "WTG 08"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          630.0,
+          0,
+          -210.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-09",
+        "kks": "WTG-09",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 09",
+          "en": "WTG 09"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -630.0,
+          0,
+          210.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-10",
+        "kks": "WTG-10",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 10",
+          "en": "WTG 10"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -210.0,
+          0,
+          210.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-11",
+        "kks": "WTG-11",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 11",
+          "en": "WTG 11"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          210.0,
+          0,
+          210.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-12",
+        "kks": "WTG-12",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 12",
+          "en": "WTG 12"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          630.0,
+          0,
+          210.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-13",
+        "kks": "WTG-13",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 13",
+          "en": "WTG 13"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -630.0,
+          0,
+          630.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-14",
+        "kks": "WTG-14",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 14",
+          "en": "WTG 14"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          -210.0,
+          0,
+          630.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-15",
+        "kks": "WTG-15",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 15",
+          "en": "WTG 15"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          210.0,
+          0,
+          630.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "wtg-16",
+        "kks": "WTG-16",
+        "kind": "offshore-turbine",
+        "stage": "generation",
+        "name": {
+          "zh": "风机 16",
+          "en": "WTG 16"
+        },
+        "principle": {
+          "zh": "叶轮将风能变为轴功，发电机及变流器输出交流电，经箱变接入集电线路。",
+          "en": "Rotor captures wind energy; generator and converter feed AC through a unit transformer to the collector."
+        },
+        "position": [
+          630.0,
+          0,
+          630.0
+        ],
+        "size": [
+          180,
+          210,
+          180
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 12
+          },
+          {
+            "key": "wind_ms",
+            "name": {
+              "zh": "轮毂风速",
+              "en": "Hub wind speed"
+            },
+            "unit": "m/s",
+            "nominal": 11
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "叶轮转速",
+              "en": "Rotor speed"
+            },
+            "unit": "rpm",
+            "nominal": 9.5
+          },
+          {
+            "key": "pitch_deg",
+            "name": {
+              "zh": "桨距角",
+              "en": "Blade pitch"
+            },
+            "unit": "°",
+            "nominal": 2
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 55,
+            "alarm_high": 85
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 7.1
+          },
+          {
+            "key": "deficit_pct",
+            "name": {
+              "zh": "出力偏差",
+              "en": "Power deficit"
+            },
+            "unit": "%",
+            "nominal": 0,
+            "alarm_high": 20
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "collector",
+        "kks": "COLLECTOR",
+        "kind": "offshore-substation",
+        "stage": "collection",
+        "name": {
+          "zh": "海上升压站",
+          "en": "Offshore substation"
+        },
+        "principle": {
+          "zh": "各发电单元汇入集电母线，由主变升压后送出。",
+          "en": "Generation units feed the collector bus before step-up and export."
+        },
+        "position": [
+          850,
+          0,
+          830
+        ],
+        "size": [
+          100,
+          25,
+          80
+        ],
+        "params": [
+          {
+            "key": "voltage_kv",
+            "name": {
+              "zh": "集电电压",
+              "en": "Collector voltage"
+            },
+            "unit": "kV",
+            "nominal": 66
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "汇集功率",
+              "en": "Collected power"
+            },
+            "unit": "MW",
+            "nominal": 192
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "main-transformer",
+        "kks": "MAIN-TRANSFORMER",
+        "kind": "transformer",
+        "stage": "grid",
+        "name": {
+          "zh": "主变压器",
+          "en": "Main transformer"
+        },
+        "principle": {
+          "zh": "主变把集电侧交流电升至 220 kV；温度与 DGA 由同一合成热状态驱动。",
+          "en": "Transformer raises collector voltage to 220 kV; one synthetic heat state drives temperature and DGA."
+        },
+        "position": [
+          850,
+          25,
+          842
+        ],
+        "size": [
+          14,
+          10,
+          8
+        ],
+        "params": [
+          {
+            "key": "top_oil_c",
+            "name": {
+              "zh": "顶层油温",
+              "en": "Top oil temperature"
+            },
+            "unit": "°C",
+            "nominal": 60,
+            "alarm_high": 85
+          },
+          {
+            "key": "h2_ppm",
+            "name": {
+              "zh": "溶解氢",
+              "en": "Dissolved hydrogen"
+            },
+            "unit": "μL/L",
+            "nominal": 20,
+            "alarm_high": 150
+          },
+          {
+            "key": "load_mva",
+            "name": {
+              "zh": "负载",
+              "en": "Loading"
+            },
+            "unit": "MVA",
+            "nominal": 195.91836734693877
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "xfmr-overheat",
+            "name": {
+              "zh": "主变过热",
+              "en": "Transformer overheating"
+            },
+            "modalities": [
+              "process",
+              "infrared",
+              "dga"
+            ],
+            "signature": {
+              "zh": "温升和 DGA 同源",
+              "en": "Heat and DGA share one state"
+            }
+          }
+        ]
+      },
+      {
+        "id": "export-cable",
+        "kks": "EXPORT-CABLE",
+        "kind": "export-cable",
+        "stage": "grid",
+        "name": {
+          "zh": "220 kV 送出海缆",
+          "en": "220 kV export cable"
+        },
+        "principle": {
+          "zh": "海底电缆将海上升压站电力送至岸上并网点；路径为教学示意。",
+          "en": "Subsea cable carries offshore power to the shore grid; route is illustrative."
+        },
+        "position": [
+          950,
+          -2,
+          1030
+        ],
+        "size": [
+          210,
+          3,
+          410
+        ],
+        "params": [
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "导体温度",
+              "en": "Conductor temperature"
+            },
+            "unit": "°C",
+            "nominal": 45,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "送出损耗",
+              "en": "Export loss"
+            },
+            "unit": "%",
+            "nominal": 1.6,
+            "alarm_high": 3
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "export-cable-hot",
+            "name": {
+              "zh": "海缆过热",
+              "en": "Export cable overheating"
+            },
+            "modalities": [
+              "process",
+              "infrared"
+            ],
+            "signature": {
+              "zh": "热状态驱动导体温升和损耗",
+              "en": "One heat state drives conductor temperature and loss"
+            }
+          }
+        ]
+      },
+      {
+        "id": "transmission-line",
+        "kks": "TRANSMISSION-LINE",
+        "kind": "line",
+        "stage": "grid",
+        "name": {
+          "zh": "220 kV 并网线路",
+          "en": "220 kV grid connection"
+        },
+        "principle": {
+          "zh": "三相线路把净出力送入电网，电流按上网功率、电压和功率因数计算。",
+          "en": "Three-phase line exports net power; current follows export, voltage and power factor."
+        },
+        "position": [
+          1040,
+          5,
+          1250
+        ],
+        "size": [
+          20,
+          50,
+          14
+        ],
+        "params": [
+          {
+            "key": "line_current_a",
+            "name": {
+              "zh": "线路电流",
+              "en": "Line current"
+            },
+            "unit": "A",
+            "nominal": 514.152373304305
+          },
+          {
+            "key": "voltage_kv",
+            "name": {
+              "zh": "并网电压",
+              "en": "Grid voltage"
+            },
+            "unit": "kV",
+            "nominal": 220
+          }
+        ],
+        "failure_modes": []
+      }
+    ],
+    "flows": [
+      {
+        "from": "wtg-01",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-02",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-03",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-04",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-05",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-06",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-07",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-08",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-09",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-10",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-11",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-12",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-13",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-14",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-15",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "wtg-16",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "collector",
+        "to": "main-transformer",
+        "medium": "power"
+      },
+      {
+        "from": "main-transformer",
+        "to": "export-cable",
+        "medium": "power"
+      },
+      {
+        "from": "export-cable",
+        "to": "transmission-line",
+        "medium": "power"
+      }
+    ],
+    "modalities": [
+      {
+        "id": "visible",
+        "name": {
+          "zh": "可见光视频",
+          "en": "Visible video"
+        }
+      },
+      {
+        "id": "infrared",
+        "name": {
+          "zh": "红外热成像",
+          "en": "Infrared thermography"
+        }
+      },
+      {
+        "id": "acoustic",
+        "name": {
+          "zh": "声学",
+          "en": "Acoustic"
+        }
+      },
+      {
+        "id": "vibration",
+        "name": {
+          "zh": "振动",
+          "en": "Vibration"
+        }
+      },
+      {
+        "id": "gas",
+        "name": {
+          "zh": "气体检测",
+          "en": "Gas detection"
+        }
+      },
+      {
+        "id": "dga",
+        "name": {
+          "zh": "油色谱",
+          "en": "Dissolved gas analysis"
+        }
+      },
+      {
+        "id": "partial_discharge",
+        "name": {
+          "zh": "局部放电",
+          "en": "Partial discharge"
+        }
+      },
+      {
+        "id": "process",
+        "name": {
+          "zh": "DCS 过程量",
+          "en": "DCS process data"
+        }
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "normal",
+        "name": {
+          "zh": "正常运行",
+          "en": "Normal operation"
+        }
+      },
+      {
+        "id": "bearing-wear",
+        "name": {
+          "zh": "风机轴承磨损",
+          "en": "Turbine bearing wear"
+        }
+      },
+      {
+        "id": "export-cable-hot",
+        "name": {
+          "zh": "送出海缆过热",
+          "en": "Export cable overheating"
+        }
+      },
+      {
+        "id": "high-wind",
+        "name": {
+          "zh": "大风切出",
+          "en": "High-wind cut-out"
+        }
+      },
+      {
+        "id": "xfmr-overheat",
+        "name": {
+          "zh": "主变过热",
+          "en": "Transformer overheating"
+        }
+      }
+    ]
+  },
+  "solar": {
+    "id": "solar",
+    "plant": {
+      "name": {
+        "zh": "60 MWac 光伏电站集群",
+        "en": "60 MWac solar cluster"
+      },
+      "summary": {
+        "zh": "合成演示场景，装机容量与地理布置为示意；各分区单独计算出力、损耗与异常特征。",
+        "en": "Synthetic demo with illustrative capacity and layout; unit outputs, losses and anomaly features share a process model."
+      },
+      "rated": {
+        "capacity_mw": 60,
+        "dc_capacity_mwp": 72.0,
+        "unit_count": 12,
+        "unit_mw": 5,
+        "grid_kv": 220,
+        "collection_kv": 35,
+        "cut_in_ms": 3,
+        "rated_wind_ms": 12,
+        "cut_out_ms": 25,
+        "dc_ac_ratio": 1.2,
+        "inverter_efficiency": 0.975,
+        "pv_temp_coefficient": -0.0035,
+        "ambient_c": 25
+      }
+    },
+    "site": {
+      "bounds": [
+        1600,
+        1400
+      ],
+      "units": [],
+      "secondary_stack": [
+        0,
+        0,
+        0
+      ],
+      "storage_tanks": [
+        0,
+        0,
+        0
+      ],
+      "camera": {
+        "position": [
+          1200,
+          950,
+          1250
+        ],
+        "target": [
+          0,
+          0,
+          50
+        ]
+      }
+    },
+    "stages": [
+      {
+        "id": "generation",
+        "order": 1,
+        "name": {
+          "zh": "光伏阵列",
+          "en": "PV arrays"
+        },
+        "conversion": {
+          "zh": "辐照 → 直流电",
+          "en": "Irradiance → DC"
+        }
+      },
+      {
+        "id": "collection",
+        "order": 2,
+        "name": {
+          "zh": "逆变与集电",
+          "en": "Inversion & collection"
+        },
+        "conversion": {
+          "zh": "直流 → 交流 / 35 kV",
+          "en": "DC → AC / 35 kV"
+        }
+      },
+      {
+        "id": "grid",
+        "order": 3,
+        "name": {
+          "zh": "升压与送出",
+          "en": "Step-up & export"
+        },
+        "conversion": {
+          "zh": "集电母线 → 220 kV 电网",
+          "en": "Collector bus → 220 kV grid"
+        }
+      }
+    ],
+    "devices": [
+      {
+        "id": "pv-01",
+        "kks": "PV-01",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 01",
+          "en": "PV block 01"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          -510.0,
+          0,
+          -260.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "pv-hotspot",
+            "name": {
+              "zh": "组件热点",
+              "en": "PV hotspot"
+            },
+            "modalities": [
+              "infrared",
+              "process"
+            ],
+            "signature": {
+              "zh": "同一热点状态驱动温升和电流失配",
+              "en": "One hotspot state drives heat and current mismatch"
+            }
+          }
+        ]
+      },
+      {
+        "id": "inverter-01",
+        "kks": "INVERTER-01",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 01",
+          "en": "Inverter 01"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          -365.0,
+          0,
+          -260.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "inverter-fault",
+            "name": {
+              "zh": "逆变器效率下降",
+              "en": "Inverter degradation"
+            },
+            "modalities": [
+              "process",
+              "infrared"
+            ],
+            "signature": {
+              "zh": "效率下降产生损耗和一致温升",
+              "en": "Reduced efficiency drives loss and heat"
+            }
+          }
+        ]
+      },
+      {
+        "id": "pv-02",
+        "kks": "PV-02",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 02",
+          "en": "PV block 02"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          -170.0,
+          0,
+          -260.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-02",
+        "kks": "INVERTER-02",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 02",
+          "en": "Inverter 02"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          -25.0,
+          0,
+          -260.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-03",
+        "kks": "PV-03",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 03",
+          "en": "PV block 03"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          170.0,
+          0,
+          -260.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-03",
+        "kks": "INVERTER-03",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 03",
+          "en": "Inverter 03"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          315.0,
+          0,
+          -260.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-04",
+        "kks": "PV-04",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 04",
+          "en": "PV block 04"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          510.0,
+          0,
+          -260.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-04",
+        "kks": "INVERTER-04",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 04",
+          "en": "Inverter 04"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          655.0,
+          0,
+          -260.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-05",
+        "kks": "PV-05",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 05",
+          "en": "PV block 05"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          -510.0,
+          0,
+          0.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-05",
+        "kks": "INVERTER-05",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 05",
+          "en": "Inverter 05"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          -365.0,
+          0,
+          0.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-06",
+        "kks": "PV-06",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 06",
+          "en": "PV block 06"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          -170.0,
+          0,
+          0.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-06",
+        "kks": "INVERTER-06",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 06",
+          "en": "Inverter 06"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          -25.0,
+          0,
+          0.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-07",
+        "kks": "PV-07",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 07",
+          "en": "PV block 07"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          170.0,
+          0,
+          0.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-07",
+        "kks": "INVERTER-07",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 07",
+          "en": "Inverter 07"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          315.0,
+          0,
+          0.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-08",
+        "kks": "PV-08",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 08",
+          "en": "PV block 08"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          510.0,
+          0,
+          0.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-08",
+        "kks": "INVERTER-08",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 08",
+          "en": "Inverter 08"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          655.0,
+          0,
+          0.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-09",
+        "kks": "PV-09",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 09",
+          "en": "PV block 09"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          -510.0,
+          0,
+          260.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-09",
+        "kks": "INVERTER-09",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 09",
+          "en": "Inverter 09"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          -365.0,
+          0,
+          260.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-10",
+        "kks": "PV-10",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 10",
+          "en": "PV block 10"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          -170.0,
+          0,
+          260.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-10",
+        "kks": "INVERTER-10",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 10",
+          "en": "Inverter 10"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          -25.0,
+          0,
+          260.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-11",
+        "kks": "PV-11",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 11",
+          "en": "PV block 11"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          170.0,
+          0,
+          260.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-11",
+        "kks": "INVERTER-11",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 11",
+          "en": "Inverter 11"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          315.0,
+          0,
+          260.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "pv-12",
+        "kks": "PV-12",
+        "kind": "pv-array",
+        "stage": "generation",
+        "name": {
+          "zh": "光伏分区 12",
+          "en": "PV block 12"
+        },
+        "principle": {
+          "zh": "光伏组件将辐照转为直流电，经独立逆变器汇入集电母线；阵列为代表性布置。",
+          "en": "PV modules convert irradiance to DC; an inverter feeds the collector bus. Representative array layout."
+        },
+        "position": [
+          510.0,
+          0,
+          260.0
+        ],
+        "size": [
+          280,
+          5,
+          200
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          },
+          {
+            "key": "irradiance_wm2",
+            "name": {
+              "zh": "辐照度",
+              "en": "Irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 800
+          },
+          {
+            "key": "cell_c",
+            "name": {
+              "zh": "组件温度",
+              "en": "Cell temperature"
+            },
+            "unit": "°C",
+            "nominal": 53,
+            "alarm_high": 85
+          },
+          {
+            "key": "mismatch_pct",
+            "name": {
+              "zh": "电流失配",
+              "en": "Current mismatch"
+            },
+            "unit": "%",
+            "nominal": 1,
+            "alarm_high": 8
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "inverter-12",
+        "kks": "INVERTER-12",
+        "kind": "inverter",
+        "stage": "collection",
+        "name": {
+          "zh": "逆变器 12",
+          "en": "Inverter 12"
+        },
+        "principle": {
+          "zh": "MPPT 跟踪与功率变换把组件直流电转成并网交流电。",
+          "en": "MPPT and conversion turn array DC into grid-synchronized AC."
+        },
+        "position": [
+          655.0,
+          0,
+          260.0
+        ],
+        "size": [
+          9,
+          4,
+          5
+        ],
+        "params": [
+          {
+            "key": "efficiency_pct",
+            "name": {
+              "zh": "转换效率",
+              "en": "Conversion efficiency"
+            },
+            "unit": "%",
+            "nominal": 97.5
+          },
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "散热器温度",
+              "en": "Heatsink temperature"
+            },
+            "unit": "°C",
+            "nominal": 50,
+            "alarm_high": 85
+          },
+          {
+            "key": "loss_pct",
+            "name": {
+              "zh": "转换损耗",
+              "en": "Conversion loss"
+            },
+            "unit": "%",
+            "nominal": 2.5,
+            "alarm_high": 10
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "交流功率",
+              "en": "AC power"
+            },
+            "unit": "MW",
+            "nominal": 5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "collector",
+        "kks": "COLLECTOR",
+        "kind": "collector",
+        "stage": "collection",
+        "name": {
+          "zh": "集电站",
+          "en": "Collector station"
+        },
+        "principle": {
+          "zh": "各发电单元汇入集电母线，由主变升压后送出。",
+          "en": "Generation units feed the collector bus before step-up and export."
+        },
+        "position": [
+          590,
+          0,
+          450
+        ],
+        "size": [
+          60,
+          9,
+          42
+        ],
+        "params": [
+          {
+            "key": "voltage_kv",
+            "name": {
+              "zh": "集电电压",
+              "en": "Collector voltage"
+            },
+            "unit": "kV",
+            "nominal": 35
+          },
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "汇集功率",
+              "en": "Collected power"
+            },
+            "unit": "MW",
+            "nominal": 60
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "main-transformer",
+        "kks": "MAIN-TRANSFORMER",
+        "kind": "transformer",
+        "stage": "grid",
+        "name": {
+          "zh": "主变压器",
+          "en": "Main transformer"
+        },
+        "principle": {
+          "zh": "主变把集电侧交流电升至 220 kV；温度与 DGA 由同一合成热状态驱动。",
+          "en": "Transformer raises collector voltage to 220 kV; one synthetic heat state drives temperature and DGA."
+        },
+        "position": [
+          590,
+          0,
+          462
+        ],
+        "size": [
+          14,
+          10,
+          8
+        ],
+        "params": [
+          {
+            "key": "top_oil_c",
+            "name": {
+              "zh": "顶层油温",
+              "en": "Top oil temperature"
+            },
+            "unit": "°C",
+            "nominal": 60,
+            "alarm_high": 85
+          },
+          {
+            "key": "h2_ppm",
+            "name": {
+              "zh": "溶解氢",
+              "en": "Dissolved hydrogen"
+            },
+            "unit": "μL/L",
+            "nominal": 20,
+            "alarm_high": 150
+          },
+          {
+            "key": "load_mva",
+            "name": {
+              "zh": "负载",
+              "en": "Loading"
+            },
+            "unit": "MVA",
+            "nominal": 61.224489795918366
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "xfmr-overheat",
+            "name": {
+              "zh": "主变过热",
+              "en": "Transformer overheating"
+            },
+            "modalities": [
+              "process",
+              "infrared",
+              "dga"
+            ],
+            "signature": {
+              "zh": "温升和 DGA 同源",
+              "en": "Heat and DGA share one state"
+            }
+          }
+        ]
+      },
+      {
+        "id": "transmission-line",
+        "kks": "TRANSMISSION-LINE",
+        "kind": "line",
+        "stage": "grid",
+        "name": {
+          "zh": "220 kV 并网线路",
+          "en": "220 kV grid connection"
+        },
+        "principle": {
+          "zh": "三相线路把净出力送入电网，电流按上网功率、电压和功率因数计算。",
+          "en": "Three-phase line exports net power; current follows export, voltage and power factor."
+        },
+        "position": [
+          680,
+          0,
+          450
+        ],
+        "size": [
+          20,
+          50,
+          14
+        ],
+        "params": [
+          {
+            "key": "line_current_a",
+            "name": {
+              "zh": "线路电流",
+              "en": "Line current"
+            },
+            "unit": "A",
+            "nominal": 160.6726166575953
+          },
+          {
+            "key": "voltage_kv",
+            "name": {
+              "zh": "并网电压",
+              "en": "Grid voltage"
+            },
+            "unit": "kV",
+            "nominal": 220
+          }
+        ],
+        "failure_modes": []
+      }
+    ],
+    "flows": [
+      {
+        "from": "inverter-01",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-01",
+        "to": "inverter-01",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-02",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-02",
+        "to": "inverter-02",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-03",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-03",
+        "to": "inverter-03",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-04",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-04",
+        "to": "inverter-04",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-05",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-05",
+        "to": "inverter-05",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-06",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-06",
+        "to": "inverter-06",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-07",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-07",
+        "to": "inverter-07",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-08",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-08",
+        "to": "inverter-08",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-09",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-09",
+        "to": "inverter-09",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-10",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-10",
+        "to": "inverter-10",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-11",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-11",
+        "to": "inverter-11",
+        "medium": "power"
+      },
+      {
+        "from": "inverter-12",
+        "to": "collector",
+        "medium": "power"
+      },
+      {
+        "from": "pv-12",
+        "to": "inverter-12",
+        "medium": "power"
+      },
+      {
+        "from": "collector",
+        "to": "main-transformer",
+        "medium": "power"
+      },
+      {
+        "from": "main-transformer",
+        "to": "transmission-line",
+        "medium": "power"
+      }
+    ],
+    "modalities": [
+      {
+        "id": "visible",
+        "name": {
+          "zh": "可见光视频",
+          "en": "Visible video"
+        }
+      },
+      {
+        "id": "infrared",
+        "name": {
+          "zh": "红外热成像",
+          "en": "Infrared thermography"
+        }
+      },
+      {
+        "id": "acoustic",
+        "name": {
+          "zh": "声学",
+          "en": "Acoustic"
+        }
+      },
+      {
+        "id": "vibration",
+        "name": {
+          "zh": "振动",
+          "en": "Vibration"
+        }
+      },
+      {
+        "id": "gas",
+        "name": {
+          "zh": "气体检测",
+          "en": "Gas detection"
+        }
+      },
+      {
+        "id": "dga",
+        "name": {
+          "zh": "油色谱",
+          "en": "Dissolved gas analysis"
+        }
+      },
+      {
+        "id": "partial_discharge",
+        "name": {
+          "zh": "局部放电",
+          "en": "Partial discharge"
+        }
+      },
+      {
+        "id": "process",
+        "name": {
+          "zh": "DCS 过程量",
+          "en": "DCS process data"
+        }
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "normal",
+        "name": {
+          "zh": "正常运行",
+          "en": "Normal operation"
+        }
+      },
+      {
+        "id": "pv-hotspot",
+        "name": {
+          "zh": "组件热点",
+          "en": "PV hotspot"
+        }
+      },
+      {
+        "id": "inverter-fault",
+        "name": {
+          "zh": "逆变器效率下降",
+          "en": "Inverter degradation"
+        }
+      },
+      {
+        "id": "cloud-front",
+        "name": {
+          "zh": "云团遮挡",
+          "en": "Cloud front"
+        }
+      },
+      {
+        "id": "xfmr-overheat",
+        "name": {
+          "zh": "主变过热",
+          "en": "Transformer overheating"
+        }
+      }
+    ]
+  },
+  "csp": {
+    "id": "csp",
+    "plant": {
+      "name": {
+        "zh": "熔盐塔式光热电站",
+        "en": "Molten-salt solar tower"
+      },
+      "summary": {
+        "zh": "定日镜聚光 → 中央吸热塔 → 冷热熔盐储罐 → 蒸汽发电；100 MWe / 2000 MWhth 教学示意。",
+        "en": "Heliostats → central receiver → two-tank molten-salt storage → steam generation. Illustrative 100 MWe / 2000 MWhth."
+      },
+      "rated": {
+        "capacity_mw": 100,
+        "unit_count": 1,
+        "unit_mw": 100,
+        "grid_kv": 220,
+        "collection_kv": 13.8,
+        "ambient_c": 25,
+        "heliostat_count": 11250,
+        "mirror_area_m2": 120,
+        "optical_efficiency": 0.7,
+        "receiver_efficiency": 0.9,
+        "cycle_efficiency": 0.4,
+        "storage_capacity_mwhth": 2000,
+        "hot_salt_c": 565,
+        "cold_salt_c": 290,
+        "salt_cp_kj_kg_k": 1.5,
+        "storage_loss_per_hour": 0.0002,
+        "dni_peak_wm2": 950
+      }
+    },
+    "site": {
+      "bounds": [
+        1650,
+        1900
+      ],
+      "units": [],
+      "secondary_stack": [
+        0,
+        0,
+        0
+      ],
+      "storage_tanks": [
+        90,
+        0,
+        720
+      ],
+      "camera": {
+        "position": [
+          1020,
+          760,
+          1210
+        ],
+        "target": [
+          0,
+          30,
+          150
+        ]
+      }
+    },
+    "stages": [
+      {
+        "id": "collection",
+        "order": 1,
+        "name": {
+          "zh": "聚光",
+          "en": "Concentration"
+        },
+        "conversion": {
+          "zh": "聚光",
+          "en": "Concentration"
+        }
+      },
+      {
+        "id": "absorption",
+        "order": 2,
+        "name": {
+          "zh": "吸热",
+          "en": "Absorption"
+        },
+        "conversion": {
+          "zh": "吸热",
+          "en": "Absorption"
+        }
+      },
+      {
+        "id": "storage",
+        "order": 3,
+        "name": {
+          "zh": "熔盐储热",
+          "en": "Salt storage"
+        },
+        "conversion": {
+          "zh": "熔盐储热",
+          "en": "Salt storage"
+        }
+      },
+      {
+        "id": "conversion",
+        "order": 4,
+        "name": {
+          "zh": "蒸汽循环",
+          "en": "Steam cycle"
+        },
+        "conversion": {
+          "zh": "蒸汽循环",
+          "en": "Steam cycle"
+        }
+      },
+      {
+        "id": "generation",
+        "order": 5,
+        "name": {
+          "zh": "发电",
+          "en": "Generation"
+        },
+        "conversion": {
+          "zh": "发电",
+          "en": "Generation"
+        }
+      },
+      {
+        "id": "grid",
+        "order": 6,
+        "name": {
+          "zh": "并网",
+          "en": "Grid export"
+        },
+        "conversion": {
+          "zh": "并网",
+          "en": "Grid export"
+        }
+      }
+    ],
+    "devices": [
+      {
+        "id": "heliostat-field",
+        "kks": "CSP-HELIOSTAT-FIELD",
+        "kind": "heliostat-field",
+        "stage": "collection",
+        "name": {
+          "zh": "定日镜场",
+          "en": "Heliostat field"
+        },
+        "principle": {
+          "zh": "双轴定日镜将太阳光反射至塔顶吸热器；三维显示代表性镜位，容量按额定有效镜面面积计算。",
+          "en": "Two-axis mirrors reflect sunlight onto the tower receiver. The 3D field is representative; capacity uses the configured effective mirror area."
+        },
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          1450,
+          8,
+          1450
+        ],
+        "params": [
+          {
+            "key": "dni_wm2",
+            "name": {
+              "zh": "直射辐照度",
+              "en": "Direct normal irradiance"
+            },
+            "unit": "W/m²",
+            "nominal": 950
+          },
+          {
+            "key": "optical_efficiency_pct",
+            "name": {
+              "zh": "光学效率",
+              "en": "Optical efficiency"
+            },
+            "unit": "%",
+            "nominal": 70
+          },
+          {
+            "key": "incident_mw",
+            "name": {
+              "zh": "镜面入射功率",
+              "en": "Incident solar power"
+            },
+            "unit": "MWth",
+            "nominal": 1282.5
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "receiver",
+        "kks": "CSP-RECEIVER",
+        "kind": "csp-receiver",
+        "stage": "absorption",
+        "name": {
+          "zh": "中央吸热塔",
+          "en": "Central receiver tower"
+        },
+        "principle": {
+          "zh": "聚焦光束加热管内熔盐，冷盐升温后进入热盐罐。此处采用熔盐，不是熔化岩石。",
+          "en": "Concentrated sunlight heats salt in receiver tubes; hot salt enters storage. This scene uses molten salt, rather than melting rocks."
+        },
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          28,
+          190,
+          28
+        ],
+        "params": [
+          {
+            "key": "thermal_mw",
+            "name": {
+              "zh": "吸收热功率",
+              "en": "Absorbed heat"
+            },
+            "unit": "MWth",
+            "nominal": 808
+          },
+          {
+            "key": "outlet_c",
+            "name": {
+              "zh": "出口盐温",
+              "en": "Salt outlet temperature"
+            },
+            "unit": "°C",
+            "nominal": 565
+          },
+          {
+            "key": "surface_c",
+            "name": {
+              "zh": "吸热面温度",
+              "en": "Receiver surface temperature"
+            },
+            "unit": "°C",
+            "nominal": 590,
+            "alarm_high": 650
+          },
+          {
+            "key": "flux_imbalance_pct",
+            "name": {
+              "zh": "热流不均匀度",
+              "en": "Flux imbalance"
+            },
+            "unit": "%",
+            "nominal": 3,
+            "alarm_high": 15
+          },
+          {
+            "key": "flow_kg_s",
+            "name": {
+              "zh": "熔盐流量",
+              "en": "Salt flow"
+            },
+            "unit": "kg/s",
+            "nominal": 1959
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "receiver-hotspot",
+            "name": {
+              "zh": "吸热器局部过热",
+              "en": "Receiver hotspot"
+            },
+            "modalities": [
+              "infrared",
+              "process"
+            ],
+            "signature": {
+              "zh": "IR hotspot and flux imbalance agree / 热像热点与热流不均匀度同时升高",
+              "en": "IR hotspot and flux imbalance agree / 热像热点与热流不均匀度同时升高"
+            }
+          }
+        ]
+      },
+      {
+        "id": "hot-tank",
+        "kks": "CSP-HOT-TANK",
+        "kind": "csp-hot-tank",
+        "stage": "storage",
+        "name": {
+          "zh": "热盐储罐",
+          "en": "Hot salt tank"
+        },
+        "principle": {
+          "zh": "高温熔盐以显热形式储能；SOC 表示可用热能，单位 MWhth。",
+          "en": "Hot salt stores sensible heat; SOC represents available thermal energy in MWhth."
+        },
+        "position": [
+          90,
+          0,
+          720
+        ],
+        "size": [
+          48,
+          28,
+          48
+        ],
+        "params": [
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "热盐温度",
+              "en": "Hot salt temperature"
+            },
+            "unit": "°C",
+            "nominal": 565
+          },
+          {
+            "key": "stored_mwhth",
+            "name": {
+              "zh": "储存热能",
+              "en": "Stored thermal energy"
+            },
+            "unit": "MWhth",
+            "nominal": 2000
+          },
+          {
+            "key": "soc_pct",
+            "name": {
+              "zh": "储能比例",
+              "en": "State of charge"
+            },
+            "unit": "%",
+            "nominal": 100
+          },
+          {
+            "key": "charge_mwth",
+            "name": {
+              "zh": "充热功率",
+              "en": "Charging heat"
+            },
+            "unit": "MWth",
+            "nominal": 300
+          },
+          {
+            "key": "discharge_mwth",
+            "name": {
+              "zh": "放热功率",
+              "en": "Discharging heat"
+            },
+            "unit": "MWth",
+            "nominal": 250
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "cold-tank",
+        "kks": "CSP-COLD-TANK",
+        "kind": "csp-cold-tank",
+        "stage": "storage",
+        "name": {
+          "zh": "冷盐储罐",
+          "en": "Cold salt tank"
+        },
+        "principle": {
+          "zh": "放热后的熔盐仍保持液态，回到冷罐并重新泵入吸热器。",
+          "en": "Salt remains liquid after releasing heat and returns to the cold tank before being pumped to the receiver."
+        },
+        "position": [
+          155,
+          0,
+          720
+        ],
+        "size": [
+          48,
+          28,
+          48
+        ],
+        "params": [
+          {
+            "key": "temperature_c",
+            "name": {
+              "zh": "冷盐温度",
+              "en": "Cold salt temperature"
+            },
+            "unit": "°C",
+            "nominal": 290
+          },
+          {
+            "key": "inventory_pct",
+            "name": {
+              "zh": "冷盐库存比例",
+              "en": "Cold salt inventory"
+            },
+            "unit": "%",
+            "nominal": 50
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "salt-pump",
+        "kks": "CSP-SALT-PUMP",
+        "kind": "csp-pump",
+        "stage": "storage",
+        "name": {
+          "zh": "熔盐循环泵",
+          "en": "Salt circulation pump"
+        },
+        "principle": {
+          "zh": "泵的流量由吸热功率及盐的比热、温差计算；轴承磨损同时影响流量、振动、声学和温度。",
+          "en": "Flow follows absorbed heat, salt heat capacity and temperature rise. Bearing wear changes flow, vibration, sound and temperature together."
+        },
+        "position": [
+          30,
+          0,
+          720
+        ],
+        "size": [
+          12,
+          7,
+          12
+        ],
+        "params": [
+          {
+            "key": "flow_kg_s",
+            "name": {
+              "zh": "熔盐流量",
+              "en": "Salt flow"
+            },
+            "unit": "kg/s",
+            "nominal": 1959
+          },
+          {
+            "key": "vibration_mm_s",
+            "name": {
+              "zh": "轴承振动",
+              "en": "Bearing vibration"
+            },
+            "unit": "mm/s",
+            "nominal": 2,
+            "alarm_high": 5
+          },
+          {
+            "key": "bearing_c",
+            "name": {
+              "zh": "轴承温度",
+              "en": "Bearing temperature"
+            },
+            "unit": "°C",
+            "nominal": 52,
+            "alarm_high": 85
+          },
+          {
+            "key": "acoustic_db",
+            "name": {
+              "zh": "声学特征",
+              "en": "Acoustic feature"
+            },
+            "unit": "dB",
+            "nominal": 52,
+            "alarm_high": 70
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "salt-pump-wear",
+            "name": {
+              "zh": "盐泵轴承磨损",
+              "en": "Salt-pump bearing wear"
+            },
+            "modalities": [
+              "vibration",
+              "infrared",
+              "acoustic"
+            ],
+            "signature": {
+              "zh": "Vibration, bearing heat and acoustic energy rise together / 振动、轴温及声学能量同时升高",
+              "en": "Vibration, bearing heat and acoustic energy rise together / 振动、轴温及声学能量同时升高"
+            }
+          }
+        ]
+      },
+      {
+        "id": "steam-generator",
+        "kks": "CSP-STEAM-GENERATOR",
+        "kind": "csp-steam",
+        "stage": "conversion",
+        "name": {
+          "zh": "蒸汽发生器",
+          "en": "Steam generator"
+        },
+        "principle": {
+          "zh": "热盐通过换热器产生蒸汽；熔盐和水汽回路分离。",
+          "en": "Hot salt generates steam through a heat exchanger; salt and water/steam stay in separate circuits."
+        },
+        "position": [
+          -45,
+          0,
+          720
+        ],
+        "size": [
+          24,
+          36,
+          20
+        ],
+        "params": [
+          {
+            "key": "thermal_mw",
+            "name": {
+              "zh": "汽轮机热输入",
+              "en": "Cycle heat input"
+            },
+            "unit": "MWth",
+            "nominal": 250
+          },
+          {
+            "key": "steam_c",
+            "name": {
+              "zh": "主汽温度",
+              "en": "Main steam temperature"
+            },
+            "unit": "°C",
+            "nominal": 540
+          },
+          {
+            "key": "steam_mpa",
+            "name": {
+              "zh": "主汽压力",
+              "en": "Main steam pressure"
+            },
+            "unit": "MPa",
+            "nominal": 13
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "generator",
+        "kks": "CSP-GENERATOR",
+        "kind": "generator",
+        "stage": "generation",
+        "name": {
+          "zh": "汽轮发电机组",
+          "en": "Turbine-generator"
+        },
+        "principle": {
+          "zh": "蒸汽驱动汽轮发电机；即使辐照归零，储热罐放热仍可驱动机组。",
+          "en": "Steam drives the turbine-generator. Stored heat can keep it running when irradiance falls to zero."
+        },
+        "position": [
+          -120,
+          0,
+          730
+        ],
+        "size": [
+          14,
+          6,
+          6
+        ],
+        "params": [
+          {
+            "key": "active_power_mw",
+            "name": {
+              "zh": "有功功率",
+              "en": "Active power"
+            },
+            "unit": "MWe",
+            "nominal": 100
+          },
+          {
+            "key": "rpm",
+            "name": {
+              "zh": "轴转速",
+              "en": "Shaft speed"
+            },
+            "unit": "rpm",
+            "nominal": 3000
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "air-cooler",
+        "kks": "CSP-AIR-COOLER",
+        "kind": "csp-cooler",
+        "stage": "conversion",
+        "name": {
+          "zh": "空冷凝汽器",
+          "en": "Air-cooled condenser"
+        },
+        "principle": {
+          "zh": "冷端排热与发电功率共同闭合汽轮循环的热量收支。",
+          "en": "Heat rejection and generated electricity close the power-cycle heat balance."
+        },
+        "position": [
+          -120,
+          0,
+          800
+        ],
+        "size": [
+          80,
+          20,
+          40
+        ],
+        "params": [
+          {
+            "key": "rejected_mw",
+            "name": {
+              "zh": "冷端排热",
+              "en": "Rejected heat"
+            },
+            "unit": "MWth",
+            "nominal": 150
+          }
+        ],
+        "failure_modes": []
+      },
+      {
+        "id": "main-transformer",
+        "kks": "CSP-MAIN-TRANSFORMER",
+        "kind": "transformer",
+        "stage": "grid",
+        "name": {
+          "zh": "主变压器",
+          "en": "Main transformer"
+        },
+        "principle": {
+          "zh": "发电机出口升压至 220 kV 送出；油温和 DGA 由同一合成负荷与故障驱动。",
+          "en": "Generator voltage is stepped up to 220 kV; oil temperature and DGA share one synthetic load/fault state."
+        },
+        "position": [
+          -210,
+          0,
+          720
+        ],
+        "size": [
+          14,
+          10,
+          8
+        ],
+        "params": [
+          {
+            "key": "top_oil_c",
+            "name": {
+              "zh": "顶层油温",
+              "en": "Top oil temperature"
+            },
+            "unit": "°C",
+            "nominal": 60,
+            "alarm_high": 85
+          },
+          {
+            "key": "h2_ppm",
+            "name": {
+              "zh": "氢气含量",
+              "en": "Dissolved hydrogen"
+            },
+            "unit": "μL/L",
+            "nominal": 20,
+            "alarm_high": 100
+          }
+        ],
+        "failure_modes": [
+          {
+            "id": "xfmr-overheat",
+            "name": {
+              "zh": "主变过热",
+              "en": "Transformer overheating"
+            },
+            "modalities": [
+              "infrared",
+              "dga",
+              "process"
+            ],
+            "signature": {
+              "zh": "Oil temperature, IR and DGA rise together / 油温、红外及 DGA 同步升高",
+              "en": "Oil temperature, IR and DGA rise together / 油温、红外及 DGA 同步升高"
+            }
+          }
+        ]
+      },
+      {
+        "id": "transmission-line",
+        "kks": "CSP-TRANSMISSION-LINE",
+        "kind": "line",
+        "stage": "grid",
+        "name": {
+          "zh": "送出线路",
+          "en": "Grid export line"
+        },
+        "principle": {
+          "zh": "上网功率扣除厂用电和主变损耗，电流按三相功率计算。",
+          "en": "Net export deducts auxiliaries and transformer loss; current follows three-phase power."
+        },
+        "position": [
+          -310,
+          0,
+          740
+        ],
+        "size": [
+          20,
+          50,
+          20
+        ],
+        "params": [
+          {
+            "key": "voltage_kv",
+            "name": {
+              "zh": "线路电压",
+              "en": "Line voltage"
+            },
+            "unit": "kV",
+            "nominal": 220
+          },
+          {
+            "key": "current_a",
+            "name": {
+              "zh": "线路电流",
+              "en": "Line current"
+            },
+            "unit": "A",
+            "nominal": 247
+          }
+        ],
+        "failure_modes": []
+      }
+    ],
+    "flows": [
+      {
+        "from": "heliostat-field",
+        "to": "receiver",
+        "medium": "solar_heat"
+      },
+      {
+        "from": "receiver",
+        "to": "hot-tank",
+        "medium": "hot_salt"
+      },
+      {
+        "from": "hot-tank",
+        "to": "steam-generator",
+        "medium": "hot_salt"
+      },
+      {
+        "from": "steam-generator",
+        "to": "cold-tank",
+        "medium": "cold_salt"
+      },
+      {
+        "from": "cold-tank",
+        "to": "salt-pump",
+        "medium": "cold_salt"
+      },
+      {
+        "from": "salt-pump",
+        "to": "receiver",
+        "medium": "cold_salt"
+      },
+      {
+        "from": "steam-generator",
+        "to": "generator",
+        "medium": "steam"
+      },
+      {
+        "from": "generator",
+        "to": "air-cooler",
+        "medium": "water"
+      },
+      {
+        "from": "generator",
+        "to": "main-transformer",
+        "medium": "power"
+      },
+      {
+        "from": "main-transformer",
+        "to": "transmission-line",
+        "medium": "power"
+      }
+    ],
+    "modalities": [
+      {
+        "id": "visible",
+        "name": {
+          "zh": "可见光视频",
+          "en": "Visible video"
+        }
+      },
+      {
+        "id": "infrared",
+        "name": {
+          "zh": "红外热成像",
+          "en": "Infrared thermography"
+        }
+      },
+      {
+        "id": "acoustic",
+        "name": {
+          "zh": "声学",
+          "en": "Acoustic"
+        }
+      },
+      {
+        "id": "vibration",
+        "name": {
+          "zh": "振动",
+          "en": "Vibration"
+        }
+      },
+      {
+        "id": "gas",
+        "name": {
+          "zh": "气体检测",
+          "en": "Gas detection"
+        }
+      },
+      {
+        "id": "dga",
+        "name": {
+          "zh": "油色谱",
+          "en": "Dissolved gas analysis"
+        }
+      },
+      {
+        "id": "partial_discharge",
+        "name": {
+          "zh": "局部放电",
+          "en": "Partial discharge"
+        }
+      },
+      {
+        "id": "process",
+        "name": {
+          "zh": "DCS 过程量",
+          "en": "DCS process data"
+        }
+      }
+    ],
+    "scenarios": [
+      {
+        "id": "normal",
+        "name": {
+          "zh": "昼夜循环 · 60倍时间",
+          "en": "Day/night cycle · 60× time"
+        }
+      },
+      {
+        "id": "day-charge",
+        "name": {
+          "zh": "白天充热片段 · 循环演示",
+          "en": "Day charging · loop"
+        }
+      },
+      {
+        "id": "night-discharge",
+        "name": {
+          "zh": "夜间放热片段 · 循环演示",
+          "en": "Night dispatch · loop"
+        }
+      },
+      {
+        "id": "storage-empty",
+        "name": {
+          "zh": "夜间储热耗尽",
+          "en": "Night depleted storage"
+        }
+      },
+      {
+        "id": "cloud-front",
+        "name": {
+          "zh": "云团遮挡",
+          "en": "Cloud passage"
+        }
+      },
+      {
+        "id": "receiver-hotspot",
+        "name": {
+          "zh": "吸热器局部过热",
+          "en": "Receiver hotspot"
+        }
+      },
+      {
+        "id": "salt-pump-wear",
+        "name": {
+          "zh": "盐泵轴承磨损",
+          "en": "Salt-pump bearing wear"
+        }
+      },
+      {
+        "id": "xfmr-overheat",
+        "name": {
+          "zh": "主变过热",
+          "en": "Transformer overheating"
+        }
+      }
+    ]
+  }
+}
